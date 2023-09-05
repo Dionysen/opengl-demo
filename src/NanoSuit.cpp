@@ -21,7 +21,7 @@ void NanoSuit::initialize() {
 
     camera = &application->getActiveCamera();
 
-    ourModel = new Model("assets/nanosuit/nanosuit.obj");
+    ourModel = new Model("textures/nanosuit/nanosuit.obj");
 }
 
 void NanoSuit::render(int passID) {

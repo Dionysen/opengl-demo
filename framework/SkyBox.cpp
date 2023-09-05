@@ -61,16 +61,8 @@ void SkyBox::initialize(){
                           (void *)0);
 
     cubemapTexture = loadCubemap(faces);
-
-   /* TextureCube* texCube = new TextureCube();
-    texCube->setMipmapLevels(1);
-    texCube->initFromFile(faces);
-    texCube->bind();
-    material->setTexture(0, texCube);*/
-
     material->useShader();
     material->getActiveShader()->setInt("skybox", 0);
-
 }
 
 void SkyBox::render(int passID){

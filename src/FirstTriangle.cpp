@@ -23,7 +23,7 @@ void FirstTriangle::initialize() {
     // 创建纹理，并设置要绑定的纹理单元
     Texture2D *texture = new Texture2D();
     texture->setMipmapLevels(1);
-    texture->initFromFile("assets/wood.png", ImageFormat::IMAGE_FORMAT_SRGB8);
+    texture->initFromFile("textures/wood.png", ImageFormat::IMAGE_FORMAT_SRGB8);
     texture->bind();
     texture->changeTextureParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     texture->changeTextureParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -32,7 +32,7 @@ void FirstTriangle::initialize() {
 
     Texture2D* texture2 = new Texture2D();
     texture2->setMipmapLevels(1);
-    texture2->initFromFile("assets/wall.jpg", ImageFormat::IMAGE_FORMAT_SRGB8);
+    texture2->initFromFile("textures/wall.jpg", ImageFormat::IMAGE_FORMAT_SRGB8);
     texture2->bind();
     texture2->changeTextureParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     texture2->changeTextureParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

@@ -42,9 +42,9 @@ void MyScene::initialize()
 
     // skybox
     std::vector<std::string> faces = {
-        "assets/skybox/right.jpg", "assets/skybox/left.jpg",
-        "assets/skybox/top.jpg", "assets/skybox/bottom.jpg",
-        "assets/skybox/front.jpg", "assets/skybox/back.jpg"};
+        "textures/skybox/right.jpg", "textures/skybox/left.jpg",
+        "textures/skybox/top.jpg", "textures/skybox/bottom.jpg",
+        "textures/skybox/front.jpg", "textures/skybox/back.jpg"};
     SkyBox *skybox = new SkyBox(faces);
     addSceneObject(skybox);
 
