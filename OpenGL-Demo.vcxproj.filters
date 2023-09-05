@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\FrameWork">
+      <UniqueIdentifier>{ab1bc541-3fb6-4f1a-958f-24d2c4757a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FrameWork">
+      <UniqueIdentifier>{926e1889-892b-4ccd-b6f3-cce904a964f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameWork\AbstractClass">
+      <UniqueIdentifier>{1f06f681-ea21-4713-8f1e-e8cb8f382979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FrameWork\AbstractClass">
+      <UniqueIdentifier>{e826dc3b-5acb-4822-b514-3409515df81e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImGUI">
+      <UniqueIdentifier>{b95fbc93-ed42-48a1-aa1e-d7f136c0f8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{6d3010de-79b7-41ad-bbd6-1a95189b0408}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="framework\Application.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Camera.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DirectionalLight.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\FBO.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Frustum.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\ImguiEmbeded.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Light.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Material.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Mesh.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Model.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Plane.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\SceneObject.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\SkyBox.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Texture.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Texture1D.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Texture2D.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Texture2DArray.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\TextureCube.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Transform.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Utils.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Wave.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\abstract_class\GLObject.cpp">
+      <Filter>Source Files\FrameWork\AbstractClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FirstTriangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NanoSuit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaveObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui_widgets.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui_demo.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui_draw.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui_impl_glfw.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\src\imgui_tables.cpp">
+      <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework\Application.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Camera.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DirectionalLight.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\FBO.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Frustum.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\ImguiEmbeded.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Light.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Material.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Mesh.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Model.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Plane.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\SceneObject.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Shader.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\SkyBox.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Texture.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Texture1D.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Texture2D.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Texture2DArray.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\TextureCube.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Transform.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Utils.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Wave.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\abstract_class\EventListener.h">
+      <Filter>Header Files\FrameWork\AbstractClass</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\abstract_class\GLObject.h">
+      <Filter>Header Files\FrameWork\AbstractClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FirstTriangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NanoSuit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaveObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\white.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\lamp.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\lamp.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\model.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\model.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\skybox.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\skybox.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\surface.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\surface.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrain.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrain.geom">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrain.tesc">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrain.tese">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrain.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrain2.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrainDepthPass.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrainDepthPass.tesc">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrainDepthPass.tese">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\terrainDepthPass.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\test.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\test.geom">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\test.tesc">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\test.tese">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\test.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\white.frag">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

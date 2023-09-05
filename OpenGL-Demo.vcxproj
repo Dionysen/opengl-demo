@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{1b39eb3f-82d8-4658-9ee5-56016798e55a}</ProjectGuid>
+    <RootNamespace>OpenGLDemo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>$(ProjectDir)/src;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/framework;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <SourcePath>$(ProjectDir)/src;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/framework;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>$(ProjectDir)/src;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/framework;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SourcePath>$(ProjectDir)/src;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/framework;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="framework\abstract_class\GLObject.cpp" />
+    <ClCompile Include="framework\Application.cpp" />
+    <ClCompile Include="framework\Camera.cpp" />
+    <ClCompile Include="framework\DirectionalLight.cpp" />
+    <ClCompile Include="framework\FBO.cpp" />
+    <ClCompile Include="framework\Frustum.cpp" />
+    <ClCompile Include="framework\ImguiEmbeded.cpp" />
+    <ClCompile Include="framework\Light.cpp" />
+    <ClCompile Include="framework\Material.cpp" />
+    <ClCompile Include="framework\Mesh.cpp" />
+    <ClCompile Include="framework\Model.cpp" />
+    <ClCompile Include="framework\Plane.cpp" />
+    <ClCompile Include="framework\SceneObject.cpp" />
+    <ClCompile Include="framework\SkyBox.cpp" />
+    <ClCompile Include="framework\Texture.cpp" />
+    <ClCompile Include="framework\Texture1D.cpp" />
+    <ClCompile Include="framework\Texture2D.cpp" />
+    <ClCompile Include="framework\Texture2DArray.cpp" />
+    <ClCompile Include="framework\TextureCube.cpp" />
+    <ClCompile Include="framework\Transform.cpp" />
+    <ClCompile Include="framework\Utils.cpp" />
+    <ClCompile Include="framework\Wave.cpp" />
+    <ClCompile Include="include\imgui\src\imgui.cpp" />
+    <ClCompile Include="include\imgui\src\imgui_demo.cpp" />
+    <ClCompile Include="include\imgui\src\imgui_draw.cpp" />
+    <ClCompile Include="include\imgui\src\imgui_impl_glfw.cpp" />
+    <ClCompile Include="include\imgui\src\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="include\imgui\src\imgui_tables.cpp" />
+    <ClCompile Include="include\imgui\src\imgui_widgets.cpp" />
+    <ClCompile Include="src\FirstTriangle.cpp" />
+    <ClCompile Include="src\gemo.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MyScene.cpp" />
+    <ClCompile Include="src\NanoSuit.cpp" />
+    <ClCompile Include="src\Sun.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
+    <ClCompile Include="src\WaveObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework\abstract_class\EventListener.h" />
+    <ClInclude Include="framework\abstract_class\GLObject.h" />
+    <ClInclude Include="framework\Application.h" />
+    <ClInclude Include="framework\Camera.h" />
+    <ClInclude Include="framework\DirectionalLight.h" />
+    <ClInclude Include="framework\FBO.h" />
+    <ClInclude Include="framework\Frustum.h" />
+    <ClInclude Include="framework\ImguiEmbeded.h" />
+    <ClInclude Include="framework\Light.h" />
+    <ClInclude Include="framework\Material.h" />
+    <ClInclude Include="framework\Mesh.h" />
+    <ClInclude Include="framework\Model.h" />
+    <ClInclude Include="framework\Plane.h" />
+    <ClInclude Include="framework\SceneObject.h" />
+    <ClInclude Include="framework\Shader.h" />
+    <ClInclude Include="framework\SkyBox.h" />
+    <ClInclude Include="framework\Texture.h" />
+    <ClInclude Include="framework\Texture1D.h" />
+    <ClInclude Include="framework\Texture2D.h" />
+    <ClInclude Include="framework\Texture2DArray.h" />
+    <ClInclude Include="framework\TextureCube.h" />
+    <ClInclude Include="framework\Transform.h" />
+    <ClInclude Include="framework\Utils.h" />
+    <ClInclude Include="framework\Wave.h" />
+    <ClInclude Include="src\FirstTriangle.h" />
+    <ClInclude Include="src\gemo.h" />
+    <ClInclude Include="src\MyScene.h" />
+    <ClInclude Include="src\NanoSuit.h" />
+    <ClInclude Include="src\Sun.h" />
+    <ClInclude Include="src\Terrain.h" />
+    <ClInclude Include="src\WaveObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\lamp.frag" />
+    <None Include="shaders\lamp.vert" />
+    <None Include="shaders\model.frag" />
+    <None Include="shaders\model.vert" />
+    <None Include="shaders\skybox.frag" />
+    <None Include="shaders\skybox.vert" />
+    <None Include="shaders\surface.frag" />
+    <None Include="shaders\surface.vert" />
+    <None Include="shaders\terrain.frag" />
+    <None Include="shaders\terrain.geom" />
+    <None Include="shaders\terrain.tesc" />
+    <None Include="shaders\terrain.tese" />
+    <None Include="shaders\terrain.vert" />
+    <None Include="shaders\terrain2.frag" />
+    <None Include="shaders\terrainDepthPass.frag" />
+    <None Include="shaders\terrainDepthPass.tesc" />
+    <None Include="shaders\terrainDepthPass.tese" />
+    <None Include="shaders\terrainDepthPass.vert" />
+    <None Include="shaders\test.frag" />
+    <None Include="shaders\test.geom" />
+    <None Include="shaders\test.tesc" />
+    <None Include="shaders\test.tese" />
+    <None Include="shaders\test.vert" />
+    <None Include="shaders\white.frag" />
+    <None Include="shaders\white.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
