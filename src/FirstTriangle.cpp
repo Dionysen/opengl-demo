@@ -42,7 +42,7 @@ void FirstTriangle::initialize() {
     material->setTexture(0, texture);
     material->setTexture(1, texture2);
     material->bind();
-
+    
     // 绑定采样器
     material->useShader();
     material->getActiveShader()->setInt("texture1", 0);
@@ -103,6 +103,11 @@ void FirstTriangle::render(int passID) {
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, lightPos);
     model = glm::scale(model, glm::vec3(20.0f));
+
+    static glm::vec3 pos = glm::vec3(0.0f);
+    //ImGui::SliderFloat3("x", glm::value_ptr(pos), -30.0f, 30.0f,"%.3f");
+    ImGui::DragFloat3("x", glm::value_ptr(pos), 0.2f, -30.0f, 30.0f, "%.3f");
+    model = glm::translate(model, pos);
 
     getMaterial().getShader(0)->setMat4("projection", camera->getProjectionMatrix());
     getMaterial().getShader(0)->setMat4("view", view);

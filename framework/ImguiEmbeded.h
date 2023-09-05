@@ -13,5 +13,7 @@ class ImguiEmbeded : public EventListener {
 
     virtual void initialize(GLFWwindow *window);
     virtual void render();
+    void renderBegin();
+    void renderEnd();
     virtual void update(Application *app);
 };

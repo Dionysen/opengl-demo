@@ -64,9 +64,11 @@ void MyScene::initialize()
 void MyScene::render()
 {
     Application::render();
+    imguiEmbeded->renderBegin();
     for (SceneObject *scene : sceneObjects)
     {
         scene->render();
     }
-    imguiEmbeded->render();
+    
+    imguiEmbeded->renderEnd();
 }

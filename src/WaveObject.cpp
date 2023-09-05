@@ -5,7 +5,7 @@ WaveObject::WaveObject() {}
 WaveObject::~WaveObject() {
     glDeleteVertexArrays(1, &surfaceVAO);
     glDeleteBuffers(1, &surfaceVBO);
-    glDeleteBuffers(1, &EBO);
+    glDeleteBuffers(1, &EBO); 
 }
 
 void WaveObject::initialize() { // ---------------------------
@@ -56,6 +56,11 @@ void WaveObject::initialize() { // ---------------------------
 }
 
 void WaveObject::render(int passID) {
+    // IMGUI
+    ImGui::Text("Model scale: ");
+    ImGui::SameLine();
+    ImGui::DragFloat("##modelScale", &modelScale, 0.001f, 0.01f, 1.0f, "%.3f", 0);
+
     times += 0.10;
     buildTessendorfWaveMesh(wave_model);
     // std::cout << "IN WAVE RENDER\n";

@@ -1,4 +1,5 @@
 #include "ImguiEmbeded.h"
+#include <iostream>
 
 ImguiEmbeded::ImguiEmbeded() {}
 
@@ -20,6 +21,7 @@ void ImguiEmbeded::render() {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
     {
+        std::cout << "IMDUI\n";
         // setup
         ImGui::Begin("Dear ImGui");
         // ...
@@ -31,6 +33,31 @@ void ImguiEmbeded::render() {
                     ImGui::GetIO().Framerate);
         ImGui::End();
         //ImGui::ShowDemoWindow();
+    }
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ImguiEmbeded::renderBegin()
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    {
+        // setup
+        ImGui::Begin("OpenGL Demo");
+        ImGui::Text("Hello");
+        // Frame rate
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+            1000.0f / ImGui::GetIO().Framerate,
+            ImGui::GetIO().Framerate);
+    }
+}
+
+void ImguiEmbeded::renderEnd()
+{
+    {
+        ImGui::End();
     }
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
