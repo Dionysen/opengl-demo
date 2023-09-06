@@ -88,13 +88,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>COPY $(ProjectDir)include\dll\* $(TargetDir)
+</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Move dll to working directory</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -104,15 +111,22 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>COPY $(ProjectDir)include\dll\* $(TargetDir)
+</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Move dll to working directory</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -120,13 +134,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>COPY $(ProjectDir)include\dll\* $(TargetDir)
+</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Move dll to working directory</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -136,15 +157,22 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp/include;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\lib\x64\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;$(ProjectDir)include\glfw\lib\glfw3.lib;$(ProjectDir)include\glew\lib\Release\x64\glew32.lib;$(ProjectDir)include\assimp\assimp.lib;$(ProjectDir)\include\devil\lib\DevIL.lib;$(ProjectDir)\include\fftw3\libfftw3-3.lib;$(ProjectDir)\include\fftw3\libfftw3f-3.lib;$(ProjectDir)\include\fftw3\libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>COPY $(ProjectDir)include\dll\* $(TargetDir)
+</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Move dll to working directory</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\abstract_class\GLObject.cpp" />
