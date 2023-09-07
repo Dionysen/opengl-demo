@@ -2,13 +2,15 @@
 
 WaveObject::WaveObject() {}
 
-WaveObject::~WaveObject() {
+WaveObject::~WaveObject()
+{
     glDeleteVertexArrays(1, &surfaceVAO);
     glDeleteBuffers(1, &surfaceVBO);
-    glDeleteBuffers(1, &EBO); 
+    glDeleteBuffers(1, &EBO);
 }
 
-void WaveObject::initialize() { // ---------------------------
+void WaveObject::initialize()
+{ // ---------------------------
     // shader
     Shader *shader = new Shader("shaders/surface.vert", "shaders/surface.frag");
     Material *material = new Material();
@@ -26,7 +28,8 @@ void WaveObject::initialize() { // ---------------------------
     int p = 0;
 
     for (int j = 0; j < N - 1; j++)
-        for (int i = 0; i < M - 1; i++) {
+        for (int i = 0; i < M - 1; i++)
+        {
             indices[p++] = i + j * N;
             indices[p++] = (i + 1) + j * N;
             indices[p++] = i + (j + 1) * N;
@@ -46,38 +49,60 @@ void WaveObject::initialize() { // ---------------------------
                  GL_STATIC_DRAW);
     delete[] indices;
     // ----------------
-    // wave
-    omega = glm::vec2(1, 1);
+    // init wave
+    omega = glm::vec2(0.2, 0.2);
     times = 0;
-    modelScale = 0.5;
+    modelScale = 0.477;
     seacolor = glm::vec3(0.65, 0.80, 0.95);
+    A = 8.65e-8f;
+    V = 6.9f;
     wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
     lightPos = glm::vec3(0.0, 400.0, 0.0);
+
+   
 }
 
-void WaveObject::render(int passID) {
+void WaveObject::render(int passID)
+{
     // IMGUI
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, glm::vec3(modelScale));
-    static glm::vec3 waveMove = glm::vec3(0.0f);
+    static glm::vec3 waveMove = glm::vec3(-670.0f, 0.0f, 1000.0f);
     // Wind strengh
-    //float A = 3e-7f;
+    // float A = 3e-7f;
     // Wind speed
-    //float V = 30;
+    // float V = 30;
     // Wind direction
-    //glm::vec2 omega;
-    if (ImGui::CollapsingHeader("Wave")) {
+    // glm::vec2 omega;
+    static float om = 0.1;
+    if (ImGui::CollapsingHeader("Wave"))
+    {
         ImGui::DragFloat("Wave Scale", &modelScale, 0.001f, 0.01f, 1.0f, "%.3f", 0);
-        ImGui::DragFloat3("Wave Position", glm::value_ptr(waveMove), 0.1f, -100.0f, 100.0f, "%.3f", 0);
+        ImGui::DragFloat3("Wave Position", glm::value_ptr(waveMove), 0.1f, -1000.0f, 1000.0f, "%.3f", 0);
         ImGui::DragFloat3("Light Position", glm::value_ptr(lightPos), 0.1, -1000, 1000, "%.3f", 0);
-        ImGui::SliderFloat("Wind strengh", &A, 3e-10f, 3e-6f, "%.10f", 0);
-        
+
+        if (ImGui::SliderFloat("Wind strengh", &A, 3e-10f, 3e-6f, "%.10f", 0))
+            wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
+        if (ImGui::SliderFloat("Wind speed", &V, 5, 60, "%.10f", 0))
+            wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
+        if (ImGui::SliderFloat("Omega", &om, 0.0, 10.0))
+        {
+            omega = glm::vec2(om, om);
+            wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
+        }
+        if(ImGui::SliderFloat("L_X", &L_x, 0.0, 10000.0)){
+            L_z = L_x;
+            wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
+        }
+ 
+
+        ImGui::ColorPicker3("Sea Color", glm::value_ptr(seacolor));
     }
     model = glm::translate(model, waveMove);
 
     times += 0.10;
     buildTessendorfWaveMesh(wave_model);
-    // std::cout << "IN WAVE RENDER\n";
+
     getMaterial().useShader();
     getMaterial().getShader(0)->setVec3("light.position", lightPos);
     getMaterial().getShader(0)->setVec3("viewPos", camera->getPosition());
@@ -100,7 +125,8 @@ void WaveObject::render(int passID) {
     glBindVertexArray(0);
 }
 
-void WaveObject::buildTessendorfWaveMesh(Wave *wave_model) {
+void WaveObject::buildTessendorfWaveMesh(Wave *wave_model)
+{
     int nVertex = N * M;
 
     wave_model->buildField(times);
@@ -110,7 +136,8 @@ void WaveObject::buildTessendorfWaveMesh(Wave *wave_model) {
     int p = 0;
 
     for (int i = 0; i < N; i++)
-        for (int j = 0; j < M; j++) {
+        for (int j = 0; j < M; j++)
+        {
             int index = j * N + i;
 
             if (heightField[index].y > heightMax)

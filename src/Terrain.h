@@ -6,33 +6,42 @@
 #include "FBO.h"
 #include "Texture2D.h"
 
-class Terrain : public SceneObject {
-  public:
-    Terrain(Sun *sun);
-    virtual ~Terrain();
+class Terrain : public SceneObject
+{
+public:
+  Terrain(Sun *sun);
+  virtual ~Terrain();
 
-    virtual void initialize();
-    virtual void render(int passID);
-    virtual void update(double deltaTime);
+  virtual void initialize();
+  virtual void render(int passID);
+  virtual void update(double deltaTime);
 
-    virtual void keyCallback(const int key, const int scanCode,
-                             const int action, const int mods);
+  virtual void keyCallback(const int key, const int scanCode,
+                           const int action, const int mods);
 
-    bool enableWireFrame;
+  bool enableWireFrame;
 
-  private:
-    float displacementScale;
-    float tessellatedTriWidth;
-    glm::ivec2 gridsize;
-    glm::vec2 size;
-    int patchCount;
-    unsigned int VAO;
+  // material
+  Shader *shader;
 
+  Material *material1;
+  Material *material2;
+  Material *material3;
 
-    Camera *camera;
-    Sun *sun;
+  void loadMaterial();
 
-    // depth pass stuff
-    glm::mat4 sunProjectionMatrix;
-    glm::mat4 bias;
+private:
+  float displacementScale;
+  float tessellatedTriWidth;
+  glm::ivec2 gridsize;
+  glm::vec2 size;
+  int patchCount;
+  unsigned int VAO;
+
+  Camera *camera;
+  Sun *sun;
+
+  // depth pass stuff
+  glm::mat4 sunProjectionMatrix;
+  glm::mat4 bias;
 };

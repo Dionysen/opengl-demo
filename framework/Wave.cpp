@@ -4,7 +4,6 @@
 
 #include <time.h>
 
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -23,8 +22,8 @@ Wave::Wave(int N, int M, float L_x, float L_z, vec2 omega, float V, float A,
     generator.seed(time(NULL));
     kNum = N * M;
 
-    heightField = new glm::vec3[kNum];  // 水面高度
-    normalField = new glm::vec3[kNum];  // 法线数据
+    heightField = new glm::vec3[kNum];
+    normalField = new glm::vec3[kNum];
 
     value_h_twiddle_0 = new complex<float>[kNum];
     value_h_twiddle_0_conj = new complex<float>[kNum];
@@ -60,7 +59,7 @@ inline float Wave::func_P_h(vec2 vec_k) const
     if (vec_k == vec2(0.0f, 0.0f))
         return 0.0f;
 
-    float L = V * V / g; 
+    float L = V * V / g;
     // Largest possible waves arising from a continuous wind of speed V
 
     float k = length(vec_k);

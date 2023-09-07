@@ -9,12 +9,13 @@ Sun::Sun(float x, float y, float z) : directionalLight(x, y, z) {}
 
 Sun::~Sun() {}
 
-void Sun::initialize() {
+void Sun::initialize()
+{
     std::cout << "Init Sun ...\n";
     transform.setPosition(DISTANCE, 0.0f, 0.0f, WORLD);
     transform.setRotation(0.0f, 90.0f, 0.0f, LOCAL, LOCAL);
-    transform.rotateBy(0.0f, 0.0f, 25.0f, WORLD, WORLD);
-    
+    transform.rotateBy(0.0f, 0.0f, 50.0f, WORLD, WORLD);
+
     computeDirection();
 
     Shader *shader = new Shader("shaders/white.vert", "shaders/white.frag");
@@ -30,41 +31,55 @@ void Sun::initialize() {
     application->addEventListener(this);
 }
 
-void Sun::render(int passID) {
+void Sun::render(int passID)
+{
     material->useShader();
 
-    glm::mat4 model = transform.getTransformationMatrix();
     static float zoom = 10.0f;
-    
-    if (ImGui::CollapsingHeader("Sun")) {
-        ImGui::BeginGroup();
+    static float vel = 50.0f;
+    transform.setScale(zoom, zoom, zoom, WORLD);
+
+    if (ImGui::CollapsingHeader("Sun"))
+    {
         ImGui::DragFloat("Sun size", &zoom, 0.01f, 5.0f, 20.0f, "%.3f", 0);
         transform.setScale(zoom, zoom, zoom, WORLD);
-        ImGui::EndGroup();
+
+        if (ImGui::SliderFloat("Distance", &DISTANCE, 400.0f, 1000.0f))
+        {
+            transform.setPosition(DISTANCE, 0.0f, 0.0f, WORLD);
+            transform.setRotation(0.0f, 90.0f, 0.0f, LOCAL, LOCAL);
+            transform.rotateBy(0.0f, 0.0f, 50.0f, WORLD, WORLD);
+            computeDirection();
+        }
     }
-    
+
     material->getActiveShader()->setMat4(
         "mvp",
-        glm::mat4(camera->getProjectionMatrix() * camera->getViewMatrix() * model));
+        glm::mat4(camera->getProjectionMatrix() * camera->getViewMatrix() * transform.getTransformationMatrix()));
     ourModel->Draw(*material->getActiveShader());
 }
 
 void Sun::update(double deltaTime) {}
 
 void Sun::keyCallback(const int key, const int scanCode, const int action,
-                      const int mods) {
+                      const int mods)
+{
     const float VEL = 1.0f;
 
-    if (key == GLFW_KEY_LEFT) {
+    if (key == GLFW_KEY_LEFT)
+    {
         transform.rotateBy(0.0f, 0.0f, VEL, WORLD, WORLD);
         computeDirection();
-    } else if (key == GLFW_KEY_RIGHT) {
+    }
+    else if (key == GLFW_KEY_RIGHT)
+    {
         transform.rotateBy(0.0f, 0.0f, -VEL, WORLD, WORLD);
         computeDirection();
     }
 }
 
-void Sun::computeDirection() {
+void Sun::computeDirection()
+{
     const glm::vec3 &dir = -transform.getPosition();
     directionalLight.setDirection(dir.x, dir.y, dir.z);
 }

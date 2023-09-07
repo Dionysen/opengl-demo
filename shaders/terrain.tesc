@@ -1,11 +1,8 @@
 #version 450 core
 
 //how many times this shader will run per patch (n?of out control points)
-// ÉèÖÃÃ¿Ò»¸öpatchµÄ¿ØÖÆµãÊıÄ¿,Ò²¾ÍÊÇËµÃ¿Ò»¸öpatch¶¼ÒªÔËĞĞn´Î´Ë×ÅÉ«Æ÷
+
 layout (vertices = 4) out;
-
-
-// gl_InvocationIDÊÇÃ¿Ò»¸öpatchÖĞ¿ØÖÆµãµÄË÷ÒıÖµ
 
 in VertexShaderOut {
 	vec2 texCoord;
@@ -37,8 +34,6 @@ struct AABB {
 	vec3 min, max;
 };
 
-
-// ¼ì²éÆ½ÃæºÍAABBÖ®¼äµÄÏà½»ĞÔ
 bool planeAABBIntersection(AABB aabb, vec4 plane) {
 	vec3 halfDiagonal =  (aabb.max - aabb.min) * 0.5;
 	vec3 center = aabb.min + halfDiagonal;
@@ -54,7 +49,7 @@ bool planeAABBIntersection(AABB aabb, vec4 plane) {
 	else return true; //intersecting
 }
 
-// ¼ì²éÊÓ×¶ÌåÆ½ÃæºÍAABBÖ®¼äµÄÏà½»ĞÔ
+
 bool frustumAABBIntersection(AABB aabb) {
 	bool intersection = false;
 	for(int i = 0; i < 6; ++i) {
@@ -66,7 +61,7 @@ bool frustumAABBIntersection(AABB aabb) {
 }
 
 
-// displacementScaleÊÇ¸ß¶ÈÍ¼µÄÎ»ÒÆËõ·ÅÒò×Ó,´´½¨Ò»¸ö°üÎ§Õû¸öpatchµÄAABB
+
 void createPatchAABB(vec3 p1, vec3 p2, vec3 p3, vec3 p4, out AABB aabb) {
 	//Using knowledge of the input vertices
 	aabb.min.x = p4.x;
@@ -85,7 +80,7 @@ void createPatchAABB(vec3 p1, vec3 p2, vec3 p3, vec3 p4, out AABB aabb) {
 // Project a sphere into clip space and return the number of triangles that are required
 // to fit across the screenspace diameter.
 
-// ½«Ò»¸öÇòÌåÍ¶Ó°µ½ÆÁÄ»¿Õ¼ä£¬²¢·µ»ØËùĞèµÄÈı½ÇĞÎÊıÁ¿£¬ÒÔÊÊÓ¦ÆÁÄ»ÉÏµÄÖ±¾¶
+
 float sphereToScreenSpaceTessellation(vec3 cp0, vec3 cp1, float diameter) {
 	vec3 mid = (cp0 + cp1) * 0.5;
 	
@@ -107,9 +102,8 @@ float sphereToScreenSpaceTessellation(vec3 cp0, vec3 cp1, float diameter) {
 }
 
 void main() {							
-	if(gl_InvocationID == 0) {  // Ö»ÓĞÒ»¸öpatchµÄµÚÒ»¸ö¿ØÖÆµã,²ÅÖ´ĞĞÒÔÏÂ´úÂë
+	if(gl_InvocationID == 0) { 
 	
-		// ´´½¨Ò»¸öAABB
 		AABB aabb; 
 		createPatchAABB(gl_in[0].gl_Position.xyz, 
 						gl_in[1].gl_Position.xyz,
@@ -117,16 +111,16 @@ void main() {
 						gl_in[3].gl_Position.xyz,
 						aabb);
 						
-		if(frustumAABBIntersection(aabb)) {	// Èç¹ûAABBÓëÊÓ×¶ÌåÏà½»
+		if(frustumAABBIntersection(aabb)) {	// ï¿½ï¿½ï¿½AABBï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½ï¿½à½»
 			//Copy control points positions to mess with their y without passing to the pipeline
-			//¸´ÖÆ¿ØÖÆµãÎ»ÖÃ£¬ÒÔÔÚ²»´«µİµ½äÖÈ¾¹ÜÏßµÄÇé¿öÏÂĞŞ¸ÄÆäy×ø±ê
+			//ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½Æµï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½İµï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
 			vec4 p0 = gl_in[0].gl_Position;
 			vec4 p1 = gl_in[1].gl_Position;
 			vec4 p2 = gl_in[2].gl_Position;
 			vec4 p3 = gl_in[3].gl_Position;
 			
 			//Displace control points on y, to account for height on LOD computations
-			// ¸ù¾İ¸ß¶ÈÍ¼²ÉÑùÖµÀ´ĞŞ¸Ä¿ØÖÆµãµÄy×ø±ê£¬²¢×ª»¯³ÉÔÚ·¶Î§ÄÚµÄ¸ß¶È
+			// ï¿½ï¿½ï¿½İ¸ß¶ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½Ş¸Ä¿ï¿½ï¿½Æµï¿½ï¿½yï¿½ï¿½ï¿½ê£¬ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½Î§ï¿½ÚµÄ¸ß¶ï¿½
 			p0.y += texture(displacementTexture, tcs_in[0].texCoord).r * displacementScale;
 			p1.y += texture(displacementTexture, tcs_in[1].texCoord).r * displacementScale;
 			p2.y += texture(displacementTexture, tcs_in[2].texCoord).r * displacementScale;
@@ -138,20 +132,20 @@ void main() {
 			const float sideLen = max(max(maxX, maxY), maxZ);*/
 			//const float sideLen = max(distance(p1, p0), distance(p1, p2));
 
-			// ¼ÆËãÈı½ÇĞÎ±ßµÄÏñËØÊı£¬ÒÔÓÃÓÚÏ¸·Ö¼¶±ğ¼ÆËã¡£
-			const float sideLen = p1.x - p0.x; //abusing knowing the tiles are square ¼ÙÉèÕâĞ©Æ½ÆÌÊÇÕı·½ĞÎµÄ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î±ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½ã¡£
+			const float sideLen = p1.x - p0.x; //abusing knowing the tiles are square ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½
 
-			// ¼ÆËã²¢ÉèÖÃÍâ²¿Ï¸·Ö¼¶±ğ
+			// ï¿½ï¿½ï¿½ã²¢ï¿½ï¿½ï¿½ï¿½ï¿½â²¿Ï¸ï¿½Ö¼ï¿½ï¿½ï¿½
 			gl_TessLevelOuter[0] = sphereToScreenSpaceTessellation(p3.xyz, p0.xyz, sideLen);
 			gl_TessLevelOuter[1] = sphereToScreenSpaceTessellation(p0.xyz, p1.xyz, sideLen);
 			gl_TessLevelOuter[2] = sphereToScreenSpaceTessellation(p1.xyz, p2.xyz, sideLen);
 			gl_TessLevelOuter[3] = sphereToScreenSpaceTessellation(p2.xyz, p3.xyz, sideLen);
-			// ¼ÆËã²¢ÉèÖÃÄÚ²¿Ï¸·Ö¼¶±ğ
+			// ï¿½ï¿½ï¿½ã²¢ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½Ï¸ï¿½Ö¼ï¿½ï¿½ï¿½
 			gl_TessLevelInner[0] = (gl_TessLevelOuter[1] + gl_TessLevelOuter[3]) * 0.5;
 			gl_TessLevelInner[1] = (gl_TessLevelOuter[0], gl_TessLevelOuter[2]) * 0.5;
 		}
 		else {
-		// Èç¹ûAABBÓëÊÓ×¶Ìå²»Ïà½»£¬½«Ï¸·Ö¼¶±ğÉèÖÃÎª-1£¬±íÊ¾²»ĞèÒªÏ¸·Ö
+		// ï¿½ï¿½ï¿½AABBï¿½ï¿½ï¿½ï¿½×¶ï¿½å²»ï¿½à½»ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª-1ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ÒªÏ¸ï¿½ï¿½
 			gl_TessLevelOuter[0] = -1.0;
 			gl_TessLevelOuter[1] = -1.0;
 			gl_TessLevelOuter[2] = -1.0;
@@ -163,10 +157,10 @@ void main() {
 	}
 
 
-	// Ö±Í¨ÎÆÀí×ø±ê
+	// Ö±Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	tcs_out[gl_InvocationID].texCoord = tcs_in[gl_InvocationID].texCoord;
 	tcs_out[gl_InvocationID].texCoord2 = tcs_in[gl_InvocationID].texCoord2;
 	
-	// Ö±Í¨¶¥µã×ø±ê
+	// Ö±Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
 }

@@ -5,7 +5,8 @@ ImguiEmbeded::ImguiEmbeded() {}
 
 ImguiEmbeded::~ImguiEmbeded() {}
 
-void ImguiEmbeded::initialize(GLFWwindow *window) { // Init Dear Imgui
+void ImguiEmbeded::initialize(GLFWwindow *window)
+{ // Init Dear Imgui
     const char *glsl_version = "#version 330";
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -16,7 +17,8 @@ void ImguiEmbeded::initialize(GLFWwindow *window) { // Init Dear Imgui
     ImGui_ImplOpenGL3_Init(glsl_version);
 }
 
-void ImguiEmbeded::render() {
+void ImguiEmbeded::render() // default render
+{
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -32,7 +34,7 @@ void ImguiEmbeded::render() {
                     1000.0f / ImGui::GetIO().Framerate,
                     ImGui::GetIO().Framerate);
         ImGui::End();
-        //ImGui::ShowDemoWindow();
+        // ImGui::ShowDemoWindow();
     }
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -46,11 +48,12 @@ void ImguiEmbeded::renderBegin()
     {
         // setup
         ImGui::Begin("OpenGL Demo");
-        ImGui::Text("Hello");
+        ImGui::Text("Welcome to my Scene!");
+        ImGui::Text("Press \"Alt + C\" to visiable cursor or not.");
         // Frame rate
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-            1000.0f / ImGui::GetIO().Framerate,
-            ImGui::GetIO().Framerate);
+                    1000.0f / ImGui::GetIO().Framerate,
+                    ImGui::GetIO().Framerate);
     }
 }
 

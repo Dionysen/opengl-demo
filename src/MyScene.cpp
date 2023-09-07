@@ -24,21 +24,21 @@ void MyScene::initialize()
     camera->setProjectionMatrix(camera->Zoom, (float)getWindowWidth() / (float)getWindowHeight(), 1.0f, 2048.0f);
     camera->setPositionAndLookAt(glm::vec3(5.0f, 500.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-    //Sun
+    // Sun
     Sun *sun = new Sun(-1.0f, -0.6f, 0.0f);
     addSceneObject(sun);
 
     // wave
     WaveObject *wave = new WaveObject();
     addSceneObject(wave);
-        
+
     // triangle
-    //FirstTriangle *triangle = new FirstTriangle();
-    //addSceneObject(triangle);
+    // FirstTriangle *triangle = new FirstTriangle();
+    // addSceneObject(triangle);
 
     // nanosuit
-    //NanoSuit *nanosuit = new NanoSuit();
-    //addSceneObject(nanosuit);
+    // NanoSuit *nanosuit = new NanoSuit();
+    // addSceneObject(nanosuit);
 
     // skybox
     std::vector<std::string> faces = {
@@ -48,12 +48,12 @@ void MyScene::initialize()
     SkyBox *skybox = new SkyBox(faces);
     addSceneObject(skybox);
 
-    //terrain
-    Terrain* terrain = new Terrain(sun);
+    // terrain
+    Terrain *terrain = new Terrain(sun);
     addSceneObject(terrain);
 
-    //gemo* G = new gemo();
-    //addSceneObject(G);
+    // gemo* G = new gemo();
+    // addSceneObject(G);
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -65,10 +65,19 @@ void MyScene::render()
 {
     Application::render();
     imguiEmbeded->renderBegin();
+    static bool isShowMesh = false;
+    ImGui::Checkbox("Show mesh", &isShowMesh);
+    if (isShowMesh)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    else
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
     for (SceneObject *scene : sceneObjects)
     {
         scene->render();
     }
-    
     imguiEmbeded->renderEnd();
 }
