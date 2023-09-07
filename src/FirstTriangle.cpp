@@ -106,7 +106,7 @@ void FirstTriangle::render(int passID) {
 
     static glm::vec3 pos = glm::vec3(0.0f);
     //ImGui::SliderFloat3("x", glm::value_ptr(pos), -30.0f, 30.0f,"%.3f");
-    ImGui::DragFloat3("x", glm::value_ptr(pos), 0.2f, -30.0f, 30.0f, "%.3f");
+    //ImGui::DragFloat3("x", glm::value_ptr(pos), 0.2f, -30.0f, 30.0f, "%.3f");
     model = glm::translate(model, pos);
 
     getMaterial().getShader(0)->setMat4("projection", camera->getProjectionMatrix());

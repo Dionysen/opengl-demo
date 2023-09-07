@@ -17,7 +17,7 @@ void MyScene::initialize()
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // create camera fisrt
-    Camera *camera = new Camera(glm::vec3(0.0f, 0.0f, 10.0f));
+    Camera *camera = new Camera(glm::vec3(0.0f, 100.0f, 10.0f));
     addCamera(camera);
     setActiveCamera(0);
     camera->setSpeed(30);
@@ -33,12 +33,12 @@ void MyScene::initialize()
     addSceneObject(wave);
         
     // triangle
-    FirstTriangle *triangle = new FirstTriangle();
-    addSceneObject(triangle);
+    //FirstTriangle *triangle = new FirstTriangle();
+    //addSceneObject(triangle);
 
     // nanosuit
-    NanoSuit *nanosuit = new NanoSuit();
-    addSceneObject(nanosuit);
+    //NanoSuit *nanosuit = new NanoSuit();
+    //addSceneObject(nanosuit);
 
     // skybox
     std::vector<std::string> faces = {

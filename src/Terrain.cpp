@@ -92,7 +92,18 @@ void Terrain::render(int passID) {
      
     getMaterial().setActiveShader(0);
     getMaterial().bind();
-    
+
+    // imgui pre
+    glm::mat4 model = glm::mat4(1.0);
+    static glm::vec3 terrainMove = glm::vec3(0.0, -47.0, 0.0);
+    model = glm::translate(model, terrainMove);
+    // imgui
+    if (ImGui::CollapsingHeader("Terrain")) {
+        ImGui::DragFloat3("Terrain Position", glm::value_ptr(terrainMove), 0.1f, -1000.0f, 1000.0f, "%.3f", 0);
+    }
+    // imgui post
+    material->getActiveShader()->setMat4("model", model);
+   
     glUniform2i(21, gridsize.x, gridsize.y);
     glUniform1f(24, displacementScale);
     glUniform2f(25, size.x, size.y);

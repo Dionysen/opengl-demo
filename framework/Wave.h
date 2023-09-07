@@ -49,8 +49,8 @@ private:
   float lambda;
   float L_x, L_z;
 
-  inline float func_omega(float k) const;
-  inline float func_P_h(vec2 vec_k) const;
-  inline complex<float> func_h_twiddle_0(vec2 vec_k);
-  inline complex<float> func_h_twiddle(int kn, int km, float t) const;
+  inline float func_omega(float k) const;  // 计算波浪频率
+  inline float func_P_h(vec2 vec_k) const; // 计算菲利普频率
+  inline complex<float> func_h_twiddle_0(vec2 vec_k); // 初始波高
+  inline complex<float> func_h_twiddle(int kn, int km, float t) const; // 当前波高
 };

@@ -29,7 +29,6 @@ void gemo::initialize()
     GLint maxTessLevel;
     glGetIntegerv(GL_MAX_TESS_GEN_LEVEL, &maxTessLevel);
     glEnable(GL_DEPTH_TEST);
-
     
     unsigned int texture;
     glGenTextures(1, &texture);

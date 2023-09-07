@@ -9,6 +9,8 @@ target("opengl")
     add_includedirs("include/glad",
                     "include/imgui/include",
                     "include/stb_image/include",
+                    "include/glm",
+                    "include/devil/include",
                     "include",
                     ".",
                     "framework",
@@ -16,5 +18,5 @@ target("opengl")
                     "src")
 
     add_packages("glfw", "fftw", "glew","assimp")
-    add_linkdirs("./include/fftw3")
-    add_links("libfftw3-3","libfftw3f-3","libfftw3l-3","OpenGL32")
+    add_linkdirs("./include/fftw3", "include/devil/lib")
+    add_links("libfftw3-3","libfftw3f-3","libfftw3l-3","OpenGL32", "DevIL")

@@ -20,8 +20,9 @@ layout(location = 11) uniform mat4 view;
 layout(location = 13) uniform mat4 projection;
 
 layout(location = 23) uniform ivec2 viewportSize;
+uniform mat4 model;
 
-mat4 pvMatrix = projection * view;
+mat4 pvMatrix = projection * view * model;
 
 vec2 projectToViewportSpace(vec4 point) {
 	vec4 clip = pvMatrix * point;
@@ -31,8 +32,9 @@ vec2 projectToViewportSpace(vec4 point) {
 }
 
 void emitVertex(int i, vec3 distToEdges) {
-	gs_out.positionWorld = gl_in[i].gl_Position.xyz;
-	gs_out.positionEye = (view * gl_in[i].gl_Position).xyz;
+// 
+	gs_out.positionWorld = (model * gl_in[i].gl_Position).xyz;
+	gs_out.positionEye = (view * model * gl_in[i].gl_Position).xyz;
 	
 	gs_out.texCoord = gs_in[i].texCoord;
 	gs_out.texCoord2 = gs_in[i].texCoord2;

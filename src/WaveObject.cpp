@@ -57,9 +57,23 @@ void WaveObject::initialize() { // ---------------------------
 
 void WaveObject::render(int passID) {
     // IMGUI
-    ImGui::Text("Model scale: ");
-    ImGui::SameLine();
-    ImGui::DragFloat("##modelScale", &modelScale, 0.001f, 0.01f, 1.0f, "%.3f", 0);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::scale(model, glm::vec3(modelScale));
+    static glm::vec3 waveMove = glm::vec3(0.0f);
+    // Wind strengh
+    //float A = 3e-7f;
+    // Wind speed
+    //float V = 30;
+    // Wind direction
+    //glm::vec2 omega;
+    if (ImGui::CollapsingHeader("Wave")) {
+        ImGui::DragFloat("Wave Scale", &modelScale, 0.001f, 0.01f, 1.0f, "%.3f", 0);
+        ImGui::DragFloat3("Wave Position", glm::value_ptr(waveMove), 0.1f, -100.0f, 100.0f, "%.3f", 0);
+        ImGui::DragFloat3("Light Position", glm::value_ptr(lightPos), 0.1, -1000, 1000, "%.3f", 0);
+        ImGui::SliderFloat("Wind strengh", &A, 3e-10f, 3e-6f, "%.10f", 0);
+        
+    }
+    model = glm::translate(model, waveMove);
 
     times += 0.10;
     buildTessendorfWaveMesh(wave_model);
@@ -77,12 +91,8 @@ void WaveObject::render(int passID) {
     getMaterial().getShader(0)->setVec3("skyColor", seacolor);
     getMaterial().getShader(0)->setFloat("material.shininess", 32.0f);
 
-    glm::mat4 view = camera->getViewMatrix();
     getMaterial().getShader(0)->setMat4("projection", camera->getProjectionMatrix());
-    getMaterial().getShader(0)->setMat4("view", view);
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::scale(model, glm::vec3(modelScale));
-    model = glm::translate(model, glm::vec3(0.0, 1.0, 0.0));
+    getMaterial().getShader(0)->setMat4("view", camera->getViewMatrix());
     getMaterial().getShader(0)->setMat4("model", model);
 
     glBindVertexArray(surfaceVAO);

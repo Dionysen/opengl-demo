@@ -14,6 +14,7 @@ void Sun::initialize() {
     transform.setPosition(DISTANCE, 0.0f, 0.0f, WORLD);
     transform.setRotation(0.0f, 90.0f, 0.0f, LOCAL, LOCAL);
     transform.rotateBy(0.0f, 0.0f, 25.0f, WORLD, WORLD);
+    
     computeDirection();
 
     Shader *shader = new Shader("shaders/white.vert", "shaders/white.frag");
@@ -31,10 +32,20 @@ void Sun::initialize() {
 
 void Sun::render(int passID) {
     material->useShader();
+
+    glm::mat4 model = transform.getTransformationMatrix();
+    static float zoom = 10.0f;
+    
+    if (ImGui::CollapsingHeader("Sun")) {
+        ImGui::BeginGroup();
+        ImGui::DragFloat("Sun size", &zoom, 0.01f, 5.0f, 20.0f, "%.3f", 0);
+        transform.setScale(zoom, zoom, zoom, WORLD);
+        ImGui::EndGroup();
+    }
+    
     material->getActiveShader()->setMat4(
         "mvp",
-        glm::mat4(camera->getProjectionMatrix() * camera->getViewMatrix() *
-                  transform.getTransformationMatrix()));
+        glm::mat4(camera->getProjectionMatrix() * camera->getViewMatrix() * model));
     ourModel->Draw(*material->getActiveShader());
 }
 
