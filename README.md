@@ -1,4 +1,4 @@
 # opengl-demo
  This is a OpenGL demo for leanring.
 
-![image-20230907214823000](.\assets\214900.png)
+![214900](https://cdn.jsdelivr.net/gh/Dionysen/BlogCDN@main/img214900.png)
