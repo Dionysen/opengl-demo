@@ -28,7 +28,9 @@ enum Camera_Movement
   FASTER_FORWARD,
   FASTER_BACKWARD,
   FASTER_LEFT,
-  FASTER_RIGHT
+  FASTER_RIGHT,
+  FASTER_UP,
+  FASTER_DOWN
 };
 
 // 摄像机默认值

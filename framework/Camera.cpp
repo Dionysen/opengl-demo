@@ -44,25 +44,21 @@ glm::mat4 Camera::getViewMatrix() // 生成观察矩阵
 
 glm::mat4 Camera::getProjectionMatrix()
 {
-    //return glm::perspective(glm::radians(ZOOM),
-    //                        (float)application->getWindowWidth() /
-    //                            (float)application->getWindowHeight(),
-    //                        0.1f, 2048.0f);
     if (projectionMatrixDirtyFlag)
     {
         projectionMatrix = glm::perspective(glm::radians(frustum.fovy), frustum.aspectRatio, frustum.near, frustum.far);
         projectionMatrixDirtyFlag = false;
     }
     return projectionMatrix;
-
 }
 
-void Camera::setProjectionMatrix(float fovy, float aspectRatio, float near, float far) {
+void Camera::setProjectionMatrix(float fovy, float aspectRatio, float near, float far)
+{
     frustum.setProjectionData(near, far, fovy, aspectRatio);
     projectionMatrixDirtyFlag = true;
 }
 
-void Camera::setPositionAndLookAt(const glm::vec3& position, const glm::vec3& lookAt, const glm::vec3& upVector)
+void Camera::setPositionAndLookAt(const glm::vec3 &position, const glm::vec3 &lookAt, const glm::vec3 &upVector)
 {
     up = upVector;
     transform.setPosition(position, WORLD);
@@ -97,7 +93,6 @@ void Camera::updateInternals()
     frustum.setCameraPosition(transform.getPosition());
     frustum.setCameraOrientation(-transform.getLocalZVector(), transform.getLocalYVector(), transform.getLocalXVector());
 }
-
 
 // callback
 void Camera::windowResizedCallback(const int width, const int height)
@@ -181,6 +176,10 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
         Position -= Right * (velocity * 10);
     if (direction == FASTER_RIGHT)
         Position += Right * (velocity * 10);
+    if (direction == FASTER_UP)
+        Position.y += velocity * 10;
+    if (direction == FASTER_DOWN)
+        Position.y -= velocity * 10;
 }
 
 void Camera::update(double deltaTime) {}

@@ -107,7 +107,7 @@ bool Application::initGLContext(int samples, bool srgbFrameBuffer)
 
     if (glVersion)
     {
-        std::cout << "OpenGL Version" << glVersion << std::endl;
+        std::cout << "OpenGL Version " << glVersion << std::endl;
     }
     else
     {
@@ -223,6 +223,12 @@ void Application::processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS &&
         glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         cameras[activeCamera]->ProcessKeyboard(FASTER_RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS &&
+        glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        cameras[activeCamera]->ProcessKeyboard(FASTER_UP, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS &&
+        glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        cameras[activeCamera]->ProcessKeyboard(FASTER_DOWN, deltaTime);
 }
 
 void Application::windowResizedCallback(const int width, const int height)
@@ -269,15 +275,17 @@ void Application::keyCallback(const int key, const int scanCode,
     {
         if (isFullScreen)
         {
-            isFullScreen = false;
-            glfwSetWindowMonitor(window, nullptr, 0, 0, SCR_WIDTH, SCR_HEIGHT,
+            glfwSetWindowMonitor(window, NULL, 100, 100, SCR_WIDTH, SCR_HEIGHT,
                                  GLFW_DONT_CARE);
+            glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+            isFullScreen = false;
         }
         else
         {
-            isFullScreen = true;
             glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, 1920,
                                  1080, GLFW_DONT_CARE);
+            glViewport(0, 0, 1920, 1080);
+            isFullScreen = true;
         }
     }
     cameras[activeCamera]->keyCallback(key, scanCode, action, mods);

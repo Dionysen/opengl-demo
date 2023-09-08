@@ -94,8 +94,6 @@ void WaveObject::render(int passID)
             L_z = L_x;
             wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
         }
- 
-
         ImGui::ColorPicker3("Sea Color", glm::value_ptr(seacolor));
     }
     model = glm::translate(model, waveMove);
