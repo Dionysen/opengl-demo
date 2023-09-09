@@ -1,6 +1,6 @@
 #pragma once
 #include "Camera.h"
-#include "ModelAnimation.h"
+#include "Model.h"
 #include "SceneObject.h"
 class NanoSuit : public SceneObject
 {
@@ -12,6 +12,6 @@ public:
   virtual void render(int passID); // 渲染内容
 
   Camera *camera;
-  AnimationModel *ourModel;
+  Model *ourModel;
   glm::vec3 lightPos;
 };

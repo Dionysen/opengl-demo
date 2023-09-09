@@ -1,5 +1,4 @@
 #include "Sun.h"
-#include "ModelAnimation.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -26,7 +25,7 @@ void Sun::initialize()
     setMaterial(material);
 
     camera = &application->getActiveCamera();
-    ourModel = new AnimationModel("meshes/sphere.obj");
+    ourModel = new Model("meshes/sphere.obj");
 
     application->addEventListener(this);
     std::cout << "The sun initialized.\n";

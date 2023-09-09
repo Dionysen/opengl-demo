@@ -67,7 +67,4 @@ protected:
   bool isCursorEnabled;
   bool isFullScreen;
   bool initialized;
-  // bool vsyncEnabled;
-
-  // inline void setVsync() { glfwSwapInterval(vsyncEnabled ? 1 : 0); }
 };

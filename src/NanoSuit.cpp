@@ -1,7 +1,6 @@
 #include "NanoSuit.h"
 #include "Material.h"
 #include "Application.h"
-#include "ModelAnimation.h"
 #include "Shader.h"
 #include <iostream>
 
@@ -23,7 +22,7 @@ void NanoSuit::initialize()
 
     camera = &application->getActiveCamera();
 
-    ourModel = new AnimationModel("textures/nanosuit/nanosuit.obj");
+    ourModel = new Model("textures/nanosuit/nanosuit.obj");
     std::cout << "The nanosuit initialized.\n";
 }
 

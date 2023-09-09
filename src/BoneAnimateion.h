@@ -4,8 +4,8 @@
 
 #include <Material.h>
 #include <Shader.h>
-#include <animater.h>
-#include <ModelAnimation.h>
+#include <Animater.h>
+#include <AnimationModel.h>
 
 class BoneAnimation : public SceneObject
 {
