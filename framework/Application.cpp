@@ -81,6 +81,7 @@ bool Application::initGLContext(int samples, bool srgbFrameBuffer)
         std::cout << "Error creating window.";
         return false;
     }
+    glfwSetWindowPos(window, 200, 100);
 
     glfwMakeContextCurrent(window);
 
@@ -275,9 +276,10 @@ void Application::keyCallback(const int key, const int scanCode,
     {
         if (isFullScreen)
         {
-            glfwSetWindowMonitor(window, NULL, 100, 100, SCR_WIDTH, SCR_HEIGHT,
+            glfwSetWindowMonitor(window, NULL, 300, 200, SCR_WIDTH, SCR_HEIGHT,
                                  GLFW_DONT_CARE);
-            glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+            glfwSetWindowMonitor(window, NULL, 300, 200, SCR_WIDTH, SCR_HEIGHT,
+                                 GLFW_DONT_CARE);
             isFullScreen = false;
         }
         else

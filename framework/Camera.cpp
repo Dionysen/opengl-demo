@@ -39,7 +39,7 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY,
 
 glm::mat4 Camera::getViewMatrix() // 生成观察矩阵
 {
-    return glm::lookAt(Position, Position + Front, Up);
+    return glm::lookAt(transform.getPosition(), transform.getPosition() + Front, Up);
 }
 
 glm::mat4 Camera::getProjectionMatrix()
@@ -60,7 +60,7 @@ void Camera::setProjectionMatrix(float fovy, float aspectRatio, float near, floa
 
 void Camera::setPositionAndLookAt(const glm::vec3 &position, const glm::vec3 &lookAt, const glm::vec3 &upVector)
 {
-    up = upVector;
+    Up = upVector;
     transform.setPosition(position, WORLD);
     this->lookAt.x = lookAt.x;
     this->lookAt.y = lookAt.y;
@@ -85,7 +85,7 @@ void Camera::setLookAt(float x, float y, float z)
 
 void Camera::updateInternals()
 {
-    glm::mat4 lookat = glm::lookAt(transform.getPosition(), lookAt, up);
+    glm::mat4 lookat = glm::lookAt(transform.getPosition(), lookAt, Up);
     transform.setLocalXVector(lookat[0].x, lookat[1].x, lookat[2].x);
     transform.setLocalYVector(lookat[0].y, lookat[1].y, lookat[2].y);
     transform.setLocalZVector(lookat[0].z, lookat[1].z, lookat[2].z);
@@ -141,7 +141,7 @@ void Camera::cursorPositionCallback(const double xpos, const double ypos)
 
 void Camera::mouseScrollCallback(double xoffset, double yoffset)
 {
-    if (isCursorEnabled)
+    if (!isCursorEnabled)
         return;
     Zoom -= static_cast<float>(yoffset);
     if (Zoom < 1.0f)
@@ -155,31 +155,32 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     float velocity = MovementSpeed * deltaTime; // 设定速度
     // 根据方向调整方向向量
     if (direction == FORWARD)
-        Position += Front * velocity;
+        transform.setPosition(transform.getPosition() + Front * velocity, WORLD);
     if (direction == BACKWARD)
-        Position -= Front * velocity;
+        transform.setPosition(transform.getPosition() - Front * velocity, WORLD);
     if (direction == LEFT)
-        Position -= Right * velocity;
+        transform.setPosition(transform.getPosition() - Right * velocity, WORLD);
     if (direction == RIGHT)
-        Position += Right * velocity;
+        transform.setPosition(transform.getPosition() + Right * velocity, WORLD);
     if (direction == UP)
-        Position.y += velocity;
+        transform.setPosition(transform.getPosition().x, transform.getPosition().y + velocity, transform.getPosition().z, WORLD);
     if (direction == DOWN)
-        Position.y -= velocity;
+        transform.setPosition(transform.getPosition().x, transform.getPosition().y - velocity, transform.getPosition().z, WORLD);
+
     // Position.y = 0.0f; // 确保不会偏离xz平面
 
     if (direction == FASTER_FORWARD)
-        Position += Front * (velocity * 10);
+        transform.setPosition(transform.getPosition() + Front * (velocity * 10), WORLD);
     if (direction == FASTER_BACKWARD)
-        Position -= Front * (velocity * 10);
+        transform.setPosition(transform.getPosition() - Front * (velocity * 10), WORLD);
     if (direction == FASTER_LEFT)
-        Position -= Right * (velocity * 10);
+        transform.setPosition(transform.getPosition() - Right * (velocity * 10), WORLD);
     if (direction == FASTER_RIGHT)
-        Position += Right * (velocity * 10);
+        transform.setPosition(transform.getPosition() + Right * (velocity * 10), WORLD);
     if (direction == FASTER_UP)
-        Position.y += velocity * 10;
+        transform.setPosition(transform.getPosition().x, transform.getPosition().y + velocity * 10, transform.getPosition().z, WORLD);
     if (direction == FASTER_DOWN)
-        Position.y -= velocity * 10;
+        transform.setPosition(transform.getPosition().x, transform.getPosition().y - velocity * 10, transform.getPosition().z, WORLD);
 }
 
 void Camera::update(double deltaTime) {}

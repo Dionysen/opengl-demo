@@ -76,18 +76,19 @@ public:
   inline glm::vec3 getPosition() { return Position; }
   inline void setSpeed(float speed) { MovementSpeed = speed; }
   inline void setApplication(Application *app) { application = app; }
+  inline glm::vec3 getUpVector() { return Up; }
+
   float Zoom;
   bool isCursorEnabled;
 
   void setProjectionMatrix(float fovy, float aspectRatio, float near, float far);
-  void setPositionAndLookAt(const glm::vec3& position, const glm::vec3& lookAt, const glm::vec3& upVector);
+  void setPositionAndLookAt(const glm::vec3 &position, const glm::vec3 &lookAt, const glm::vec3 &upVector);
 
   void setPosition(float x, float y, float z);
   void setLookAt(float x, float y, float z);
 
 private:
   glm::vec3 lookAt;
-  glm::vec3 up;
   void updateInternals();
   // 摄像机属性
   glm::vec3 Position; // 摄像机位置向量

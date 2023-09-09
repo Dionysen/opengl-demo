@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "list": "cpp",
         "algorithm": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -32,7 +33,6 @@
         "istream": "cpp",
         "iterator": "cpp",
         "limits": "cpp",
-        "list": "cpp",
         "locale": "cpp",
         "map": "cpp",
         "memory": "cpp",

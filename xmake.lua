@@ -15,6 +15,7 @@ target("opengl")
                     ".",
                     "framework",
                     "framework/abstract_class",
+                    "framework/utils",
                     "src")
 
     add_packages("glfw", "fftw", "glew","assimp")

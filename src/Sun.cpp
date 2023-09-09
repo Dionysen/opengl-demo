@@ -1,5 +1,5 @@
 #include "Sun.h"
-#include "Model.h"
+#include "ModelAnimation.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -11,7 +11,7 @@ Sun::~Sun() {}
 
 void Sun::initialize()
 {
-    std::cout << "Init Sun ...\n";
+    std::cout << "Init the sun ...\n";
     transform.setPosition(DISTANCE, 0.0f, 0.0f, WORLD);
     transform.setRotation(0.0f, 90.0f, 0.0f, LOCAL, LOCAL);
     transform.rotateBy(0.0f, 0.0f, 50.0f, WORLD, WORLD);
@@ -26,9 +26,10 @@ void Sun::initialize()
     setMaterial(material);
 
     camera = &application->getActiveCamera();
-    ourModel = new Model("meshes/sphere.obj");
+    ourModel = new AnimationModel("meshes/sphere.obj");
 
     application->addEventListener(this);
+    std::cout << "The sun initialized.\n";
 }
 
 void Sun::render(int passID)

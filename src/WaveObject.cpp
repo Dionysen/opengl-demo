@@ -54,12 +54,13 @@ void WaveObject::initialize()
     times = 0;
     modelScale = 0.477;
     seacolor = glm::vec3(0.65, 0.80, 0.95);
-    A = 8.65e-8f;
-    V = 6.9f;
+    A = 3e-10f;
+    V = 60.0f;
+    L_x = 10000;
+    L_z = 10000;
+
     wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
     lightPos = glm::vec3(0.0, 400.0, 0.0);
-
-   
 }
 
 void WaveObject::render(int passID)
@@ -81,16 +82,17 @@ void WaveObject::render(int passID)
         ImGui::DragFloat3("Wave Position", glm::value_ptr(waveMove), 0.1f, -1000.0f, 1000.0f, "%.3f", 0);
         ImGui::DragFloat3("Light Position", glm::value_ptr(lightPos), 0.1, -1000, 1000, "%.3f", 0);
 
-        if (ImGui::SliderFloat("Wind strengh", &A, 3e-10f, 3e-6f, "%.10f", 0))
+        if (ImGui::SliderFloat("Wind strengh", &A, 3e-13f, 3e-6f, "%.10f", 0))
             wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
-        if (ImGui::SliderFloat("Wind speed", &V, 5, 60, "%.10f", 0))
+        if (ImGui::SliderFloat("Wind speed", &V, 5, 300, "%.10f", 0))
             wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
         if (ImGui::SliderFloat("Omega", &om, 0.0, 10.0))
         {
             omega = glm::vec2(om, om);
             wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
         }
-        if(ImGui::SliderFloat("L_X", &L_x, 0.0, 10000.0)){
+        if (ImGui::SliderFloat("L_X", &L_x, 0.0, 100000.0))
+        {
             L_z = L_x;
             wave_model = new Wave(N, M, L_x, L_z, omega, V, A, 1);
         }

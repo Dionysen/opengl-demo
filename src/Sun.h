@@ -2,7 +2,7 @@
 
 #include "Camera.h"
 #include "DirectionalLight.h"
-#include "Model.h"
+#include "ModelAnimation.h"
 #include "SceneObject.h"
 
 class Sun : public SceneObject
@@ -25,6 +25,6 @@ public:
 private:
   DirectionalLight directionalLight;
   void computeDirection();
-  Model *ourModel;
+  AnimationModel *ourModel;
   Camera *camera;
 };
