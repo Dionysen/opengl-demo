@@ -25,8 +25,8 @@ void MyScene::initialize()
     camera->setProjectionMatrix(camera->Zoom, (float)getWindowWidth() / (float)getWindowHeight(), 0.01f, 2048.0f);
 
     // Sun
-    Sun *sun = new Sun(-1.0f, -0.6f, 0.0f);
-    addSceneObject(sun);
+    // Sun *sun = new Sun(-1.0f, -0.6f, 0.0f);
+    // addSceneObject(sun);
 
     // wave
     // WaveObject *wave = new WaveObject();
@@ -37,8 +37,8 @@ void MyScene::initialize()
     // addSceneObject(triangle);
 
     // nanosuit
-    NanoSuit *nanosuit = new NanoSuit();
-    addSceneObject(nanosuit);
+    // NanoSuit *nanosuit = new NanoSuit();
+    // addSceneObject(nanosuit);
 
     // skybox
     // std::vector<std::string> faces = {
@@ -52,7 +52,7 @@ void MyScene::initialize()
     // Terrain *terrain = new Terrain(sun);
     // addSceneObject(terrain);
 
-    // gemo* G = new gemo();
+    // gemo *G = new gemo();
     // addSceneObject(G);
 
     BoneAnimation *boneAnim = new BoneAnimation();
