@@ -13,8 +13,7 @@
 
 class SceneObject;
 class Camera;
-class Application : public EventListener
-{
+class Application : public EventListener {
 public:
   Application();
   ~Application();
@@ -25,8 +24,8 @@ public:
 
   virtual void processInput(GLFWwindow *window);
   virtual void windowResizedCallback(const int width, const int height);
-  virtual void keyCallback(const int key, const int scanCode,
-                           const int action, const int mods);
+  virtual void keyCallback(const int key, const int scanCode, const int action,
+                           const int mods);
   virtual void cursorPositionCallback(const double xpos, const double ypos);
   virtual void mouseButtonCallback(const int button, const int action,
                                    const int mods);
