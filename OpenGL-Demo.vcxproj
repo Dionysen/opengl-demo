@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/include/fftw3;$(ProjectDir)/src;$(ProjectDir)/framework;$(ProjectDir)/framework/utils;$(ProjectDir)/framework/abstract_class;$(ProjectDir)/include/glfw/include;$(ProjectDir)/include/stb_image/include;$(ProjectDir)/include/assimp;$(ProjectDir)/include/devil/include;$(ProjectDir)/include/glm;$(ProjectDir)/include/glew/include;$(ProjectDir)/include/imgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -176,7 +176,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\abstract_class\GLObject.cpp" />
+    <ClCompile Include="framework\Animater.cpp" />
+    <ClCompile Include="framework\Animation.cpp" />
+    <ClCompile Include="framework\AnimationModel.cpp" />
     <ClCompile Include="framework\Application.cpp" />
+    <ClCompile Include="framework\Bone.cpp" />
     <ClCompile Include="framework\Camera.cpp" />
     <ClCompile Include="framework\DirectionalLight.cpp" />
     <ClCompile Include="framework\FBO.cpp" />
@@ -204,19 +208,17 @@
     <ClCompile Include="include\imgui\src\imgui_impl_opengl3.cpp" />
     <ClCompile Include="include\imgui\src\imgui_tables.cpp" />
     <ClCompile Include="include\imgui\src\imgui_widgets.cpp" />
-    <ClCompile Include="src\FirstTriangle.cpp" />
-    <ClCompile Include="src\gemo.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MyScene.cpp" />
-    <ClCompile Include="src\NanoSuit.cpp" />
-    <ClCompile Include="src\Sun.cpp" />
-    <ClCompile Include="src\Terrain.cpp" />
-    <ClCompile Include="src\WaveObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\abstract_class\EventListener.h" />
     <ClInclude Include="framework\abstract_class\GLObject.h" />
+    <ClInclude Include="framework\Animater.h" />
+    <ClInclude Include="framework\Animation.h" />
+    <ClInclude Include="framework\AnimationModel.h" />
     <ClInclude Include="framework\Application.h" />
+    <ClInclude Include="framework\Bone.h" />
     <ClInclude Include="framework\Camera.h" />
     <ClInclude Include="framework\DirectionalLight.h" />
     <ClInclude Include="framework\FBO.h" />
@@ -237,6 +239,8 @@
     <ClInclude Include="framework\TextureCube.h" />
     <ClInclude Include="framework\Transform.h" />
     <ClInclude Include="framework\Utils.h" />
+    <ClInclude Include="framework\utils\Animdata.h" />
+    <ClInclude Include="framework\utils\AssimpGlmHelpers.h" />
     <ClInclude Include="framework\Wave.h" />
     <ClInclude Include="src\FirstTriangle.h" />
     <ClInclude Include="src\gemo.h" />

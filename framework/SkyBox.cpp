@@ -64,10 +64,6 @@ void SkyBox::initialize()
     TextureCube *texCube = new TextureCube(true);
     texCube->initFromFile(faces);
     material->setTexture(0, texCube);
-
-    // cubemapTexture = loadCubemap(faces);
-
-    material->useShader();
     material->getActiveShader()->setInt("skybox", 0);
 }
 
@@ -75,16 +71,10 @@ void SkyBox::render(int passID)
 {
 
     glDepthFunc(GL_LEQUAL);
-    material->useShader();
-    glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)application->getWindowWidth() / (float)application->getWindowHeight(), 0.1f, 100.0f);
-    glm::mat4 view = glm::mat4(glm::mat3(camera->getViewMatrix()));
-    material->getShader(0)->setMat4("view", view);
-    material->getShader(0)->setMat4("projection", projection);
-
+    material->bind();
+    material->getActiveShader()->setMat4("view", glm::mat4(glm::mat3(camera->getViewMatrix())));
+    material->getActiveShader()->setMat4("projection", camera->getProjectionMatrix());
     glBindVertexArray(skyboxVAO);
-    material->bindTextures();
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
     glDepthFunc(GL_LESS); // set depth function back to default

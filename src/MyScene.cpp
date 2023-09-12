@@ -29,8 +29,8 @@ void MyScene::initialize()
     // addSceneObject(sun);
 
     // wave
-    // WaveObject *wave = new WaveObject();
-    // addSceneObject(wave);
+    WaveObject *wave = new WaveObject();
+    addSceneObject(wave);
 
     // triangle
     // FirstTriangle *triangle = new FirstTriangle();
@@ -41,12 +41,12 @@ void MyScene::initialize()
     // addSceneObject(nanosuit);
 
     // skybox
-    // std::vector<std::string> faces = {
-    //     "textures/skybox/right.jpg", "textures/skybox/left.jpg",
-    //     "textures/skybox/top.jpg", "textures/skybox/bottom.jpg",
-    //     "textures/skybox/front.jpg", "textures/skybox/back.jpg"};
-    // SkyBox *skybox = new SkyBox(faces);
-    // addSceneObject(skybox);
+    std::vector<std::string> faces = {
+        "textures/skybox/right.jpg", "textures/skybox/left.jpg",
+        "textures/skybox/top.jpg", "textures/skybox/bottom.jpg",
+        "textures/skybox/front.jpg", "textures/skybox/back.jpg"};
+    SkyBox *skybox = new SkyBox(faces);
+    addSceneObject(skybox);
 
     // terrain
     // Terrain *terrain = new Terrain(sun);

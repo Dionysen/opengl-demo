@@ -99,28 +99,10 @@
     <ClCompile Include="framework\abstract_class\GLObject.cpp">
       <Filter>Source Files\FrameWork\AbstractClass</Filter>
     </ClCompile>
-    <ClCompile Include="src\FirstTriangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gemo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\MyScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NanoSuit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sun.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WaveObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\imgui\src\imgui_widgets.cpp">
@@ -143,6 +125,18 @@
     </ClCompile>
     <ClCompile Include="include\imgui\src\imgui_tables.cpp">
       <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Animater.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Animation.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\AnimationModel.cpp">
+      <Filter>Source Files\FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Bone.cpp">
+      <Filter>Source Files\FrameWork</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +232,24 @@
     </ClInclude>
     <ClInclude Include="src\WaveObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Animater.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Animation.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\AnimationModel.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Bone.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\utils\AssimpGlmHelpers.h">
+      <Filter>Header Files\FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\utils\Animdata.h">
+      <Filter>Header Files\FrameWork</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
