@@ -17,57 +17,68 @@ const ImageFormat ImageFormat::IMAGE_FORMAT_RGB8_LINEAR = ImageFormat(GL_RGB8, G
 const ImageFormat ImageFormat::IMAGE_FORMAT_R8 = ImageFormat(GL_R8, GL_RED, GL_UNSIGNED_BYTE, 1, 1);
 const ImageFormat ImageFormat::IMAGE_FORMAT_R16 = ImageFormat(GL_R16, GL_RED, GL_UNSIGNED_SHORT, 1, 2);
 
-const ImageFormat ImageFormat::IMAGE_FORMAT_DEPTH_32F = ImageFormat(GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_FLOAT, 1, 4);
+const ImageFormat ImageFormat::IMAGE_FORMAT_DEPTH_32F =
+    ImageFormat(GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_FLOAT, 1, 4);
 
-
-Texture::Texture(unsigned int type) : type(type), mipmapLevels(8) {
+Texture::Texture(unsigned int type) : type(type), mipmapLevels(8)
+{
     create();
 }
-Texture::~Texture() {}
+Texture::~Texture()
+{
+}
 
-void Texture::create() {
+void Texture::create()
+{
     glCreateTextures(type, 1, &textureID);
 }
 
-void Texture::destroy() {
+void Texture::destroy()
+{
     glDeleteTextures(1, &textureID);
 }
 
-void Texture::changeTextureParameter(GLenum parameter, GLfloat value) {
+void Texture::changeTextureParameter(GLenum parameter, GLfloat value)
+{
     glTexParameteri(GL_TEXTURE_2D, parameter, value);
 }
 
-void Texture::bind(int unit) const {
+void Texture::bind(int unit) const
+{
     glBindTextureUnit(unit, textureID);
 }
 
-void Texture::bind() const {
+void Texture::bind() const
+{
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(type, textureID);
 }
 
-void Texture::initFromFile(const std::string& path, const ImageFormat& format) {
-   
+void Texture::initFromFile(const std::string& path, const ImageFormat& format)
+{
+
     ImageData imagedata = loadFile(path, format);
-    
-    if (imagedata.data) {
+
+    if (imagedata.data)
+    {
         images.push_back(imagedata);
         pushToGPU();
     }
     else
         std::cout << "init failed ...\n";
-    
 }
 
-void Texture::initFromFiles(const std::vector<std::string>& paths, const ImageFormat& format) {
-    for (std::string path : paths) {
+void Texture::initFromFiles(const std::vector<std::string>& paths, const ImageFormat& format)
+{
+    for (std::string path : paths)
+    {
         images.push_back(loadFile(path, format));
     }
     pushToGPU();
 }
 
-
-void Texture::initFromData(uint32_t width, uint32_t height, const uint8_t* data, const ImageFormat& format) {
+void Texture::initFromData(uint32_t width, uint32_t height, const uint8_t* data, const ImageFormat& format)
+{
 
     ImageData imageData;
     imageData.format = format;
@@ -76,7 +87,8 @@ void Texture::initFromData(uint32_t width, uint32_t height, const uint8_t* data,
     imageData.height = height;
     imageData.sizeInBytes = width * height * format.numberOfChannels * format.bytesPerChannel;
 
-    if (data != 0) {
+    if (data != 0)
+    {
         imageData.data = new uint8_t[imageData.sizeInBytes];
         memcpy(imageData.data, data, imageData.sizeInBytes);
     }
@@ -88,32 +100,33 @@ void Texture::initFromData(uint32_t width, uint32_t height, const uint8_t* data,
     pushToGPU();
 }
 
-const ImageData Texture::loadFile(const std::string& path, const ImageFormat& format) {
-    
-    // stb_image
-  
-    //ImageData imageData;
-    //imageData.format = format;
-    //int nrComponents;
+const ImageData Texture::loadFile(const std::string& path, const ImageFormat& format)
+{
 
-    //unsigned char* data = stbi_load(path.c_str(), &imageData.width, &imageData.height, &nrComponents, 0);
+    // stb_image
+
+    // ImageData imageData;
+    // imageData.format = format;
+    // int nrComponents;
+
+    // unsigned char* data = stbi_load(path.c_str(), &imageData.width, &imageData.height, &nrComponents, 0);
     //// check format
-    //if (nrComponents != imageData.format.numberOfChannels)
+    // if (nrComponents != imageData.format.numberOfChannels)
     //{
-    //    std::cout << "Failed to load image from file: " << path << "[Format error!\n]" << std::endl;
-    //}
+    //     std::cout << "Failed to load image from file: " << path << "[Format error!\n]" << std::endl;
+    // }
     //// check data
-    //if (data)
+    // if (data)
     //{
-    //    imageData.sizeInBytes = imageData.width * imageData.height * imageData.format.numberOfChannels;
-    //    imageData.data = new unsigned char[imageData.sizeInBytes];
-    //    memcpy(imageData.data, data, imageData.sizeInBytes);
-    //}
-    //else
+    //     imageData.sizeInBytes = imageData.width * imageData.height * imageData.format.numberOfChannels;
+    //     imageData.data = new unsigned char[imageData.sizeInBytes];
+    //     memcpy(imageData.data, data, imageData.sizeInBytes);
+    // }
+    // else
     //{
-    //    std::cout << "Failed to load image from file: " << path << std::endl;
-    //}
-    //return imageData;
+    //     std::cout << "Failed to load image from file: " << path << std::endl;
+    // }
+    // return imageData;
 
     // DevIL
 
@@ -128,19 +141,22 @@ const ImageData Texture::loadFile(const std::string& path, const ImageFormat& fo
     ImageData imageData;
 
     ILboolean result = ilLoadImage(path.c_str());
-    if (result) {
-        //ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+    if (result)
+    {
+        // ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
         imageData.format = format;
 
         imageData.width = ilGetInteger(IL_IMAGE_WIDTH);
         imageData.height = ilGetInteger(IL_IMAGE_HEIGHT);
-        imageData.sizeInBytes = imageData.width * imageData.height * imageData.format.numberOfChannels * imageData.format.bytesPerChannel;
+        imageData.sizeInBytes =
+            imageData.width * imageData.height * imageData.format.numberOfChannels * imageData.format.bytesPerChannel;
 
         imageData.data = new uint8_t[imageData.sizeInBytes];
         memcpy(imageData.data, ilGetData(), imageData.sizeInBytes);
     }
-    else {
+    else
+    {
         std::cout << "Failed to load image from file: " << path << std::endl;
     }
 
@@ -149,13 +165,15 @@ const ImageData Texture::loadFile(const std::string& path, const ImageFormat& fo
     return imageData;
 }
 
-const void* Texture::getTexel(const ImageData& imageData, const int x, const int y, const int z) {
+const void* Texture::getTexel(const ImageData& imageData, const int x, const int y, const int z)
+{
     uint32_t texelSize = imageData.format.bytesPerChannel * imageData.format.numberOfChannels;
     uint8_t* ptr = imageData.data + (y * texelSize * imageData.width) + (x * texelSize);
     return ptr;
 }
 
-void Texture::setTexel(int imageIndex, const int x, const int y, const int z, const void* value) {
+void Texture::setTexel(int imageIndex, const int x, const int y, const int z, const void* value)
+{
     const ImageData& imageData = images[imageIndex];
     uint32_t texelSize = imageData.format.bytesPerChannel * imageData.format.numberOfChannels;
     uint8_t* ptr = imageData.data + (y * texelSize * imageData.width) + (x * texelSize);
@@ -175,7 +193,8 @@ unsigned int Texture::loadCubemap(std::vector<std::string> faces)
         unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data)
         {
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         data);
             stbi_image_free(data);
         }
         else
@@ -233,11 +252,10 @@ unsigned int Texture::generateTexture3D(int w, int h, int d)
     return tex_output;
 }
 
-const unsigned int
-Texture::loadTextures(const std::vector<std::string> &files) {
+const unsigned int Texture::loadTextures(const std::vector<std::string>& files)
+{
     return 0;
 }
-
 
 const unsigned int Texture::loadTexture2D(const std::string path)
 {
@@ -245,7 +263,7 @@ const unsigned int Texture::loadTexture2D(const std::string path)
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrComponents, 0);
+    unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {
         unsigned int format{};

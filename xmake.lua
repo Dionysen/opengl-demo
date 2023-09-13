@@ -43,8 +43,8 @@ target("opengl")
             "include/devil/lib",
             "include/glew/lib",
             "include/glfw/lib",
-            "include/assimp")
-        add_links("libfftw3-3", "libfftw3f-3", "libfftw3l-3", "OpenGL32", "DevIL", "glew32", "glfw3", "assimp")
+            "include/assimp/lib/x64")
+        add_links("libfftw3-3", "libfftw3f-3", "libfftw3l-3", "OpenGL32", "DevIL", "glew32", "glfw3", "assimp-vc143-mt")
     end
     -- /NODEFAULTLIB:msvcrt
 

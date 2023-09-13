@@ -3,10 +3,10 @@
 
 class MyScene : public Application
 {
-public:
-  virtual void initialize();
-  virtual void render(); // 渲染内容
+  public:
+    virtual void initialize();
+    virtual void render(); // 渲染内容
 
-  int waveID;
-  float cameraSpeed;
+    int waveID;
+    float cameraSpeed;
 };

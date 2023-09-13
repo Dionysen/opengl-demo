@@ -27,9 +27,8 @@ using namespace std;
 unsigned int TextureFromFile(const char *path, const string &directory,
                              bool gamma = false);
 
-class Model
-{
-public:
+class Model {
+  public:
     // model data
     vector<meshTexture>
         textures_loaded; // stores all the textures loaded so far, optimization
@@ -39,19 +38,17 @@ public:
     bool gammaCorrection;
     Model() {}
     // constructor, expects a filepath to a 3D model.
-    Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
-    {
+    Model(string const &path, bool gamma = false) : gammaCorrection(gamma) {
         loadModel(path);
     }
 
     // draws the model, and thus all its meshes
-    void Draw(Shader &shader)
-    {
+    void Draw(Shader &shader) {
         for (unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shader);
     }
 
-protected:
+  protected:
     // loads a model with supported ASSIMP extensions from file and stores the
     // resulting meshes in the meshes vector.
     void loadModel(string const &path);
@@ -65,13 +62,13 @@ protected:
     // checks all material textures of a given type and loads the textures if
     // they're not loaded yet. the required info is returned as a Texture
     // struct.
-    vector<meshTexture> loadMaterialTextures(aiMaterial *mat, aiTextureType type,
-                                             string typeName);
+    vector<meshTexture>
+    loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
 };
 
 inline unsigned int TextureFromFile(const char *path, const string &directory,
-                                    bool gamma)
-{
+                                    bool gamma) {
+
     string filename = string(path);
     filename = directory + '/' + filename;
 
@@ -81,8 +78,7 @@ inline unsigned int TextureFromFile(const char *path, const string &directory,
     int width, height, nrComponents;
     unsigned char *data =
         stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-    if (data)
-    {
+    if (data) {
         GLenum format;
         if (nrComponents == 1)
             format = GL_RED;
@@ -103,10 +99,9 @@ inline unsigned int TextureFromFile(const char *path, const string &directory,
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
         stbi_image_free(data);
-    }
-    else
-    {
-        std::cout << "Texture failed to load at path: " << path << std::endl;
+    } else {
+        std::cout << "Texture of Model failed to load at path: " << path
+                  << std::endl;
         stbi_image_free(data);
     }
 

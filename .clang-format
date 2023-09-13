@@ -1,0 +1,14 @@
+IndentWidth: 4
+
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+BasedOnStyle: Microsoft
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  # AfterEnum: true
+  # AfterFunction: true
+  # AfterStruct: false
+  SplitEmptyFunction: false

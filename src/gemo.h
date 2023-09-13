@@ -1,25 +1,30 @@
 #pragma once
-#include "SceneObject.h"
 #include "Camera.h"
+#include "SceneObject.h"
 #include <Material.h>
+
+// #include "stb_image.h"
+#include <Texture.h>
 
 class gemo : public SceneObject
 {
 
-public:
-    gemo() {}
+  public:
+    gemo()
+    {}
     ~gemo()
     {
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
     }
 
-    virtual void
-    initialize()
+    virtual void initialize()
     {
         material = new Material();
-        // Shader* shader = new Shader("shaders/test.vert", "shaders/test.frag", "shaders/test.geom");
-        Shader *shader = new Shader("shaders/test.vert", "shaders/test.frag", nullptr, "shaders/test.tesc", "shaders/test.tese");
+        // Shader* shader = new Shader("shaders/test.vert", "shaders/test.frag",
+        // "shaders/test.geom");
+        Shader* shader =
+            new Shader("shaders/test.vert", "shaders/test.frag", nullptr, "shaders/test.tesc", "shaders/test.tese");
         material->setShader(0, shader);
         material->setActiveShader(0);
 
@@ -33,9 +38,13 @@ public:
         unsigned int texture;
         glGenTextures(1, &texture);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
+        glBindTexture(GL_TEXTURE_2D,
+                      texture); // all upcoming GL_TEXTURE_2D operations now have
+                                // effect on this texture object
         // set the texture wrapping parameters
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // set texture wrapping to GL_REPEAT (default wrapping method)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
+                        GL_REPEAT); // set texture wrapping to GL_REPEAT (default
+                                    // wrapping method)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         // set texture filtering parameters
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -43,8 +52,9 @@ public:
 
         // load image, create texture and generate mipmaps
         int width, height, nrChannels;
-        // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-        unsigned char *data = stbi_load("textures/river_heightmap.png", &width, &height, &nrChannels, 0);
+        // The FileSystem::getPath(...) is part of the GitHub repository so we can
+        // find files on any IDE/platform; replace it with your own image path.
+        unsigned char* data = stbi_load("textures/river_heightmap.png", &width, &height, &nrChannels, 0);
         if (data)
         {
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -102,10 +112,10 @@ public:
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 
         // position attribute
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
         // texCoord attribute
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(sizeof(float) * 3));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(sizeof(float) * 3));
         glEnableVertexAttribArray(1);
 
         glPatchParameteri(GL_PATCH_VERTICES, 4);
@@ -117,7 +127,9 @@ public:
     {
         material->bind();
 
-        glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)application->getWindowWidth() / (float)application->getWindowHeight(), 0.1f, 100000.0f);
+        glm::mat4 projection = glm::perspective(
+            glm::radians(camera->Zoom), (float)application->getWindowWidth() / (float)application->getWindowHeight(),
+            0.1f, 100000.0f);
         material->getActiveShader()->setMat4("projection", projection);
         material->getActiveShader()->setMat4("view", camera->getViewMatrix());
 
@@ -128,8 +140,9 @@ public:
         glDrawArrays(GL_PATCHES, 0, 4 * rez * rez);
     }
 
-    Camera *camera;
+    Camera* camera;
     unsigned int VAO, VBO;
     unsigned int rez;
-    gemo(Camera *camera, unsigned int VAO, unsigned int VBO) : camera(camera), VAO(VAO), VBO(VBO) {}
+    gemo(Camera* camera, unsigned int VAO, unsigned int VBO) : camera(camera), VAO(VAO), VBO(VBO)
+    {}
 };
