@@ -12,29 +12,27 @@
  * Ax + By + Cz + D = 0
  * with D = -Apx - Bpy - Cpz = -N.P
  */
-class Plane {
+class Plane
+{
   public:
     Plane();
-    Plane(const glm::vec3 &normal, const glm::vec3 &point);
-    Plane(const glm::vec3 &point1, const glm::vec3 &point2,
-          const glm::vec3 &point3);
+    Plane(const glm::vec3& normal, const glm::vec3& point);
+    Plane(const glm::vec3& point1, const glm::vec3& point2, const glm::vec3& point3);
     ~Plane();
 
-
     // calculate the NPD
-    void modify(const glm::vec3 &normal, const glm::vec3 &point);
-    void modify(const glm::vec3 &point1, const glm::vec3 &point2,
-                const glm::vec3 &point3);
+    void modify(const glm::vec3& normal, const glm::vec3& point);
+    void modify(const glm::vec3& point1, const glm::vec3& point2, const glm::vec3& point3);
 
-    float distanceToPointAndSide(const glm::vec3 &point)
-        const; // can return negatives meaning point on the oposite side of N
+    float distanceToPointAndSide(
+        const glm::vec3& point) const;  // can return negatives meaning point on the oposite side of N
 
-    inline const glm::vec3 &getNormal() const { return N; }
-    inline const glm::vec3 &getPoint() const { return P; }
-    inline float getD() const { return D; }
+    inline const glm::vec3& getNormal() const { return N; }
+    inline const glm::vec3& getPoint() const { return P; }
+    inline float            getD() const { return D; }
 
   private:
-    glm::vec3 N;  // 法向量
-    glm::vec3 P;  // 平面上的一点
-    float D;      // 平面方程中的常数项  Ax + By + Cz + D = 0
+    glm::vec3 N;
+    glm::vec3 P;
+    float     D;
 };

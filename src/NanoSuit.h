@@ -11,18 +11,14 @@
 class NanoSuit : public SceneObject
 {
   public:
-    NanoSuit()
-    {
-    }
-    ~NanoSuit()
-    {
-    }
+    NanoSuit() {}
+    ~NanoSuit() {}
 
     virtual void initialize()
     {
         std::cout << "Init nanosuit ...\n";
         Material* material = new Material();
-        Shader* shader = new Shader("shaders/model.vert", "shaders/model.frag");
+        Shader*   shader   = new Shader("shaders/model.vert", "shaders/model.frag");
         material->setShader(0, shader);
         material->setActiveShader(0);
         material->useShader();
@@ -44,13 +40,13 @@ class NanoSuit : public SceneObject
         getMaterial().getShader(0)->setMat4("view", view);
 
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::scale(model, glm::vec3(1.0));
+        model           = glm::scale(model, glm::vec3(1.0));
         getMaterial().getShader(0)->setMat4("model", model);
         ourModel->Draw(*material->getShader(0));
     }
 
   private:
-    Camera* camera;
-    Model* ourModel;
+    Camera*   camera;
+    Model*    ourModel;
     glm::vec3 lightPos;
 };

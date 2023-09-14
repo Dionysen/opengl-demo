@@ -13,57 +13,58 @@
 
 class SceneObject;
 class Camera;
-class Application : public EventListener {
-public:
-  Application();
-  ~Application();
+class Application : public EventListener
+{
+  public:
+    Application();
+    ~Application();
 
-  virtual void initialize();
-  virtual void render();
-  virtual void update(double deltaTime);
+    virtual void initialize();
+    virtual void render();
+    virtual void update(double deltaTime);
 
-  virtual void processInput(GLFWwindow *window);
-  virtual void windowResizedCallback(const int width, const int height);
-  virtual void keyCallback(const int key, const int scanCode, const int action,
-                           const int mods);
-  virtual void cursorPositionCallback(const double xpos, const double ypos);
-  virtual void mouseButtonCallback(const int button, const int action,
-                                   const int mods);
+    virtual void processInput(GLFWwindow* window);
+    virtual void windowResizedCallback(const int width, const int height);
+    virtual void keyCallback(const int key, const int scanCode, const int action, const int mods);
+    virtual void cursorPositionCallback(const double xpos, const double ypos);
+    virtual void mouseButtonCallback(const int button, const int action, const int mods);
 
-  bool initGLContext(int samples = 0, bool srgbFrameBuffer = true);
-  void startLoop();
+    bool initGLContext(int samples = 0, bool srgbFrameBuffer = true);
+    void startLoop();
 
-  void addCamera(Camera *camera);
-  int addSceneObject(SceneObject *sceneObject);
-  int addEventListener(EventListener *eventListener);
-  void setWindowProperties(const std::string &title, const int width,
-                           const int height);
+    void addCamera(Camera* camera);
+    int  addSceneObject(SceneObject* sceneObject);
+    int  addEventListener(EventListener* eventListener);
+    void setWindowProperties(const std::string& title, const int width, const int height);
 
-  inline int getWindowWidth() const { return SCR_WIDTH; }
-  inline int getWindowHeight() const { return SCR_HEIGHT; }
-  inline Camera &getCamera(int id) const { return *cameras[id]; }
-  inline void setActiveCamera(int id) { activeCamera = id; }
-  inline Camera &getActiveCamera() const { return *cameras[activeCamera]; }
+    inline int getWindowWidth() const { return SCR_WIDTH; }
+    inline int getWindowHeight() const { return SCR_HEIGHT; }
 
-  inline float getDeltaTime() const { return this->deltaTime; }
+    inline void setActiveCamera(int id) { activeCamera = id; }
 
-protected:
-  GLFWwindow *window;
-  int SCR_WIDTH, SCR_HEIGHT;
-  std::string windowTitle;
+    inline Camera& getCamera(int id) const { return *cameras[id]; }
+    inline Camera& getActiveCamera() const { return *cameras[activeCamera]; }
 
-  ImguiEmbeded *imguiEmbeded;
+    inline float getDeltaTime() const { return this->deltaTime; }
 
-  std::vector<SceneObject *> sceneObjects;
-  std::vector<EventListener *> eventListeners;
-  std::vector<Camera *> cameras;
+  protected:
+    GLFWwindow* window;
+    int         SCR_WIDTH, SCR_HEIGHT;
+    std::string windowTitle;
 
-  int activeCamera;
+    ImguiEmbeded* imguiEmbeded;
 
-  float deltaTime;
-  float lastFrame;
+    std::vector<SceneObject*>   sceneObjects;
+    std::vector<EventListener*> eventListeners;
+    std::vector<Camera*>        cameras;
 
-  bool isCursorEnabled;
-  bool isFullScreen;
-  bool initialized;
+    int activeCamera;
+
+    float deltaTime;
+    float lastFrame;
+
+    bool isCursorEnabled;
+    bool isFullScreen;
+    bool isShowMesh;
+    bool initialized;
 };

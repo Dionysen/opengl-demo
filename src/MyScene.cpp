@@ -9,8 +9,8 @@
 #include "SkyBox.h"
 #include "Sun.h"
 #include "Terrain.h"
+#include "Terrain2.h"
 #include "WaveObject.h"
-#include "gemo.h"
 
 void MyScene::initialize()
 {
@@ -26,7 +26,7 @@ void MyScene::initialize()
     camera->setProjectionMatrix(camera->Zoom, (float)getWindowWidth() / (float)getWindowHeight(), 0.01f, 2048.0f);
 
     // Sun
-    // Sun *sun = new Sun(-1.0f, -0.6f, 0.0f);
+    // Sun* sun = new Sun(-1.0f, -0.6f, 0.0f);
     // addSceneObject(sun);
 
     // wave
@@ -34,33 +34,34 @@ void MyScene::initialize()
     // addSceneObject(wave);
 
     // triangle
-    FirstTriangle* triangle = new FirstTriangle();
-    addSceneObject(triangle);
+    // FirstTriangle* triangle = new FirstTriangle();
+    // addSceneObject(triangle);
 
     //   nanosuit
-    NanoSuit* nanosuit = new NanoSuit();
-    addSceneObject(nanosuit);
+    // NanoSuit* nanosuit = new NanoSuit();
+    // addSceneObject(nanosuit);
 
     // skybox
-    std::vector<std::string> faces = {"textures/skybox/right.jpg", "textures/skybox/left.jpg",
-                                      "textures/skybox/top.jpg",   "textures/skybox/bottom.jpg",
-                                      "textures/skybox/front.jpg", "textures/skybox/back.jpg"};
-    SkyBox* skybox = new SkyBox(faces);
-    addSceneObject(skybox);
+    // std::vector<std::string> faces = {
+    //     "textures/skybox/right.jpg",  "textures/skybox/left.jpg",  "textures/skybox/top.jpg",
+    //     "textures/skybox/bottom.jpg", "textures/skybox/front.jpg", "textures/skybox/back.jpg",
+    // };
+    // SkyBox* skybox = new SkyBox(faces);
+    // addSceneObject(skybox);
 
     // terrain
-    // Terrain *terrain = new Terrain(sun);
+    // Terrain* terrain = new Terrain(sun);
     // addSceneObject(terrain);
 
-    //   gemo *G = new gemo();
-    //   addSceneObject(G);
+    // gemo* G = new gemo();
+    // addSceneObject(G);
 
-    //   BoneAnimation *boneAnim = new BoneAnimation();
-    //   addSceneObject(boneAnim);
+    // BoneAnimation* boneAnim = new BoneAnimation();
+    // addSceneObject(boneAnim);
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    Application::initialize(); // init all objects
+    Application::initialize();  // init all objects
     std::cout << "Application initialized.\n";
 }
 
@@ -68,9 +69,6 @@ void MyScene::render()
 {
     Application::render();
     imguiEmbeded->renderBegin();
-
-    static bool isShowMesh = false;
-    static bool fullscreen = false;
 
     if (ImGui::Checkbox("Show mesh", &isShowMesh))
     {
@@ -84,12 +82,16 @@ void MyScene::render()
         }
     }
     ImGui::SameLine();
-    if (ImGui::Checkbox("fullscreen", &fullscreen))
+    if (ImGui::Checkbox("fullscreen", &isFullScreen))
     {
-        if (fullscreen)
+        if (isFullScreen)
             glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, 1920, 1080, GLFW_DONT_CARE);
         else
-            glfwSetWindowMonitor(window, NULL, 300, 200, 1280, 900, GLFW_DONT_CARE);
+        {
+            glfwSetWindowMonitor(window, NULL, 200, 100, SCR_WIDTH, SCR_HEIGHT, GLFW_DONT_CARE);
+            glfwSetWindowSize(window, 1280, 900);
+            glViewport(0, 0, 1280, 900);
+        }
     }
 
     if (ImGui::DragFloat("Camera speed", &cameraSpeed, 0.3f, 1.0f, 300.0f))
@@ -98,9 +100,6 @@ void MyScene::render()
     }
 
     // Scene render
-    for (SceneObject* scene : sceneObjects)
-    {
-        scene->render();
-    }
+    for (SceneObject* scene : sceneObjects) { scene->render(); }
     imguiEmbeded->renderEnd();
 }

@@ -5,10 +5,9 @@
 
 class Texture2DArray : public Texture
 {
-public:
-	Texture2DArray();
-	virtual ~Texture2DArray();
+  public:
+    Texture2DArray();
+    virtual ~Texture2DArray();
 
-	void pushToGPU(bool deleteAfterPush = false);
+    void pushToGPU(bool deleteAfterPush = false);
 };
-

@@ -3,41 +3,45 @@
 #include <iostream>
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
-      MouseSensitivity(SENSITIVITY), Zoom(ZOOM), isCursorEnabled(false)
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f))
+    , MovementSpeed(SPEED)
+    , MouseSensitivity(SENSITIVITY)
+    , Zoom(ZOOM)
+    , isCursorEnabled(false)
 {
     Position = position;
-    WorldUp = up;
-    Yaw = yaw;
-    Pitch = pitch;
+    WorldUp  = up;
+    Yaw      = yaw;
+    Pitch    = pitch;
 
     transform.setPosition(position, WORLD);
 
     frustum.setProjectionData(0.1f, 100.0f, 45.0f, 1.0f);
-    frustum.setCameraData(transform.getPosition(), -transform.getLocalZVector(),
-                          transform.getLocalYVector());
+    frustum.setCameraData(transform.getPosition(), -transform.getLocalZVector(), transform.getLocalYVector());
 
     updateCameraVectors();
 }
 
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY,
-               float upZ, float yaw, float pitch)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
-      MouseSensitivity(SENSITIVITY), Zoom(ZOOM), isCursorEnabled(false)
+Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f))
+    , MovementSpeed(SPEED)
+    , MouseSensitivity(SENSITIVITY)
+    , Zoom(ZOOM)
+    , isCursorEnabled(false)
 {
     Position = glm::vec3(posX, posY, posZ);
-    WorldUp = glm::vec3(upX, upY, upZ);
-    Yaw = yaw;
-    Pitch = pitch;
+    WorldUp  = glm::vec3(upX, upY, upZ);
+    Yaw      = yaw;
+    Pitch    = pitch;
 
-    frustum.setProjectionData(0.1f, 2048.0f, ZOOM, (float)application->getWindowWidth() / (float)application->getWindowHeight());
-    frustum.setCameraData(transform.getPosition(), -transform.getLocalZVector(),
-                          transform.getLocalYVector());
+    frustum.setProjectionData(
+        0.1f, 2048.0f, ZOOM, (float)application->getWindowWidth() / (float)application->getWindowHeight());
+    frustum.setCameraData(transform.getPosition(), -transform.getLocalZVector(), transform.getLocalYVector());
 
     updateCameraVectors();
 }
 
-glm::mat4 Camera::getViewMatrix() // 生成观察矩阵
+glm::mat4 Camera::getViewMatrix()  // 生成观察矩阵
 {
     return glm::lookAt(transform.getPosition(), transform.getPosition() + Front, Up);
 }
@@ -58,7 +62,7 @@ void Camera::setProjectionMatrix(float fovy, float aspectRatio, float near, floa
     projectionMatrixDirtyFlag = true;
 }
 
-void Camera::setPositionAndLookAt(const glm::vec3 &position, const glm::vec3 &lookAt, const glm::vec3 &upVector)
+void Camera::setPositionAndLookAt(const glm::vec3& position, const glm::vec3& lookAt, const glm::vec3& upVector)
 {
     Up = upVector;
     transform.setPosition(position, WORLD);
@@ -91,7 +95,8 @@ void Camera::updateInternals()
     transform.setLocalZVector(lookat[0].z, lookat[1].z, lookat[2].z);
 
     frustum.setCameraPosition(transform.getPosition());
-    frustum.setCameraOrientation(-transform.getLocalZVector(), transform.getLocalYVector(), transform.getLocalXVector());
+    frustum.setCameraOrientation(
+        -transform.getLocalZVector(), transform.getLocalYVector(), transform.getLocalXVector());
 }
 
 // callback
@@ -101,8 +106,7 @@ void Camera::windowResizedCallback(const int width, const int height)
     glViewport(0, 0, width, height);
 }
 
-void Camera::keyCallback(const int key, const int scanCode, const int action,
-                         const int mods) {}
+void Camera::keyCallback(const int key, const int scanCode, const int action, const int mods) {}
 
 void Camera::cursorPositionCallback(const double xpos, const double ypos)
 {
@@ -111,25 +115,24 @@ void Camera::cursorPositionCallback(const double xpos, const double ypos)
 
     if (firstMouse)
     {
-        lastX = xpos;
-        lastY = ypos;
+        lastX      = xpos;
+        lastY      = ypos;
         firstMouse = false;
     }
 
     float xoffset = xpos - lastX;
-    float yoffset =
-        lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float yoffset = lastY - ypos;  // reversed since y-coordinates go from bottom to top
 
     lastX = xpos;
     lastY = ypos;
 
-    xoffset *= MouseSensitivity; // x方向的鼠标偏离
-    yoffset *= MouseSensitivity; // y方向的鼠标偏离
+    xoffset *= MouseSensitivity;  // x方向的鼠标偏离
+    yoffset *= MouseSensitivity;  // y方向的鼠标偏离
 
-    Yaw += xoffset;   // 偏航
-    Pitch += yoffset; // 仰角
+    Yaw += xoffset;               // 偏航
+    Pitch += yoffset;             // 仰角
 
-    if (true) // 确保仰角足够大时屏幕不会被翻转
+    if (true)                     // 确保仰角足够大时屏幕不会被翻转
     {
         if (Pitch > 89.0f)
             Pitch = 89.0f;
@@ -152,7 +155,7 @@ void Camera::mouseScrollCallback(double xoffset, double yoffset)
 
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 {
-    float velocity = MovementSpeed * deltaTime; // 设定速度
+    float velocity = MovementSpeed * deltaTime;  // 设定速度
     // 根据方向调整方向向量
     if (direction == FORWARD)
         transform.setPosition(transform.getPosition() + Front * velocity, WORLD);
@@ -163,9 +166,11 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     if (direction == RIGHT)
         transform.setPosition(transform.getPosition() + Right * velocity, WORLD);
     if (direction == UP)
-        transform.setPosition(transform.getPosition().x, transform.getPosition().y + velocity, transform.getPosition().z, WORLD);
+        transform.setPosition(
+            transform.getPosition().x, transform.getPosition().y + velocity, transform.getPosition().z, WORLD);
     if (direction == DOWN)
-        transform.setPosition(transform.getPosition().x, transform.getPosition().y - velocity, transform.getPosition().z, WORLD);
+        transform.setPosition(
+            transform.getPosition().x, transform.getPosition().y - velocity, transform.getPosition().z, WORLD);
 
     // Position.y = 0.0f; // 确保不会偏离xz平面
 
@@ -178,9 +183,11 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     if (direction == FASTER_RIGHT)
         transform.setPosition(transform.getPosition() + Right * (velocity * 10), WORLD);
     if (direction == FASTER_UP)
-        transform.setPosition(transform.getPosition().x, transform.getPosition().y + velocity * 10, transform.getPosition().z, WORLD);
+        transform.setPosition(
+            transform.getPosition().x, transform.getPosition().y + velocity * 10, transform.getPosition().z, WORLD);
     if (direction == FASTER_DOWN)
-        transform.setPosition(transform.getPosition().x, transform.getPosition().y - velocity * 10, transform.getPosition().z, WORLD);
+        transform.setPosition(
+            transform.getPosition().x, transform.getPosition().y - velocity * 10, transform.getPosition().z, WORLD);
 }
 
 void Camera::update(double deltaTime) {}
@@ -188,11 +195,11 @@ void Camera::update(double deltaTime) {}
 void Camera::updateCameraVectors()
 {
     // calculate the new Front vector
-    glm::vec3 front{0};
+    glm::vec3 front{ 0 };
     front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
     front.y = sin(glm::radians(Pitch));
     front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-    Front = glm::normalize(front);
+    Front   = glm::normalize(front);
     // 同时重新计算了右向量和上向量
     Right = glm::normalize(glm::cross(Front, WorldUp));
     // 将向量归一化，因为你向上或向下看的次数越多，它们的长度就越接近0，这会导致移动速度变慢。

@@ -4,14 +4,15 @@
 
 class TextureCube : public Texture
 {
-public:
-	TextureCube(bool invertYFaces = false); // prefix 0 = +x, 1 = -x, +y, -y, +z, -z
-	~TextureCube();
+  public:
+    TextureCube(bool invertYFaces = false);  // prefix 0 = +x, 1 = -x, +y, -y, +z, -z
+    ~TextureCube();
 
-	virtual void initFromFile(const std::vector<std::string> &path, const ImageFormat &format = ImageFormat::IMAGE_FORMAT_SRGB8);
+    virtual void initFromFile(const std::vector<std::string>& path,
+                              const ImageFormat&              format = ImageFormat::IMAGE_FORMAT_SRGB8);
 
-	virtual void pushToGPU(bool deleteAfterPush = false);
+    virtual void pushToGPU(bool deleteAfterPush = false);
 
-private:
-	bool invertYFaces;
+  private:
+    bool invertYFaces;
 };

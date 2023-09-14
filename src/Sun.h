@@ -12,12 +12,8 @@
 class Sun : public SceneObject
 {
   public:
-    Sun(float x, float y, float z) : directionalLight(x, y, z)
-    {
-    }
-    ~Sun()
-    {
-    }
+    Sun(float x, float y, float z) : directionalLight(x, y, z) {}
+    ~Sun() {}
 
     virtual void initialize()
     {
@@ -28,14 +24,14 @@ class Sun : public SceneObject
 
         computeDirection();
 
-        Shader* shader = new Shader("shaders/white.vert", "shaders/white.frag");
+        Shader*   shader   = new Shader("shaders/white.vert", "shaders/white.frag");
         Material* material = new Material();
         material->setShader(0, shader);
         material->setActiveShader(0);
         material->bind();
         setMaterial(material);
 
-        camera = &application->getActiveCamera();
+        camera   = &application->getActiveCamera();
         ourModel = new Model("meshes/sphere.obj");
 
         application->addEventListener(this);
@@ -47,7 +43,7 @@ class Sun : public SceneObject
         material->useShader();
 
         static float zoom = 10.0f;
-        static float vel = 50.0f;
+        static float vel  = 50.0f;
         transform.setScale(zoom, zoom, zoom, WORLD);
 
         if (ImGui::CollapsingHeader("Sun"))
@@ -64,14 +60,12 @@ class Sun : public SceneObject
             }
         }
 
-        material->getActiveShader()->setMat4("mvp", glm::mat4(camera->getProjectionMatrix() * camera->getViewMatrix() *
-                                                              transform.getTransformationMatrix()));
+        material->getActiveShader()->setMat4(
+            "mvp", glm::mat4(camera->getProjectionMatrix() * camera->getViewMatrix() * transform.getTransformationMatrix()));
         ourModel->Draw(*material->getActiveShader());
     }
 
-    virtual void update(double deltaTime)
-    {
-    }
+    virtual void update(double deltaTime) {}
 
     virtual void keyCallback(const int key, const int scanCode, const int action, const int mods)
     {
@@ -89,20 +83,19 @@ class Sun : public SceneObject
         }
     }
 
-    inline DirectionalLight& getDirectionalLight()
-    {
-        return directionalLight;
-    }
+    inline DirectionalLight& getDirectionalLight() { return directionalLight; }
+
     float DISTANCE = 800.0f;
 
   private:
     DirectionalLight directionalLight;
+
     void computeDirection()
     {
         const glm::vec3& dir = -transform.getPosition();
         directionalLight.setDirection(dir.x, dir.y, dir.z);
     }
 
-    Model* ourModel;
+    Model*  ourModel;
     Camera* camera;
 };

@@ -12,11 +12,10 @@ using namespace std;
 
 #define MAX_BONE_INFLUENCE 4
 
-struct Vertex {
+struct Vertex
+{
     glm::vec3 Position;
-
     glm::vec3 Normal;
-
     glm::vec2 TexCoords;
     // tangent
     glm::vec3 Tangent;
@@ -28,26 +27,28 @@ struct Vertex {
     float m_Weights[MAX_BONE_INFLUENCE];
 };
 
-struct meshTexture {
+struct meshTexture
+{
     unsigned int id;
-    string type;
-    string path;
+    string       type;
+    string       path;
 };
 
-class Mesh {
+class Mesh
+{
   public:
-    vector<Vertex> vertices;
+    vector<Vertex>       vertices;
     vector<unsigned int> indices;
-    vector<meshTexture> textures;
+    vector<meshTexture>  textures;
+
     unsigned int VAO;
 
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices,
-         vector<meshTexture> textures);
+    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<meshTexture> textures);
 
-    void Draw(Shader &shader);
+    void Draw(Shader& shader);
 
   private:
     unsigned int VBO, EBO;
-    void setupMesh();
+    void         setupMesh();
 };
 #endif

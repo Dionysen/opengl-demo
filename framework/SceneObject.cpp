@@ -6,7 +6,10 @@ SceneObject::~SceneObject() {}
 
 void SceneObject::initialize() {}
 
-void SceneObject::render(int passID) { material->bind(); }
+void SceneObject::render(int passID)
+{
+    material->bind();
+}
 
 void SceneObject::update(double deltaTime) {}
 
