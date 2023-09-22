@@ -68,14 +68,15 @@ class Texture
     inline const ImageData&   getImageData(int index) { return images[index]; }
     inline const unsigned int getTextureID() { return textureID; }
 
-    // unused func
-    const unsigned int loadTextures(const std::vector<std::string>& files);
-    const unsigned int loadTexture2D(const std::string file);
-
-    unsigned int loadCubemap(std::vector<std::string> faces);
-    unsigned int generateTexture2D(int w, int h);
-    unsigned int generateTexture3D(int w, int h, int d);
     unsigned int type, textureID;
+
+    // unused func
+    // const unsigned int loadTextures(const std::vector<std::string>& files);
+    // const unsigned int loadTexture2D(const std::string file);
+
+    // unsigned int loadCubemap(std::vector<std::string> faces);
+    // unsigned int generateTexture2D(int w, int h);
+    // unsigned int generateTexture3D(int w, int h, int d);
 
   protected:
     const ImageData loadFile(const std::string& path, const ImageFormat& format);

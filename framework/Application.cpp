@@ -1,7 +1,9 @@
 #include "Application.h"
 
 #include "Camera.h"
+#include "imgui.h"
 #include <iostream>
+#include <ostream>
 #include <sstream>
 
 // GLOBAL APPLICATION REFERENCE
@@ -36,6 +38,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 Application::Application()
     : SCR_WIDTH(1280)
     , SCR_HEIGHT(900)
+    , TEMP_SCR_HEIGHT(SCR_HEIGHT)
+    , TEMP_SCR_WIDTH(SCR_WIDTH)
     , windowTitle("OpenGL App")
     , isCursorEnabled(true)
     , initialized(false)
@@ -230,6 +234,7 @@ void Application::windowResizedCallback(const int width, const int height)
         for (Camera* c : cameras) { c->windowResizedCallback(width, height); }
         for (EventListener* el : eventListeners) { el->windowResizedCallback(width, height); }
     }
+    std::cout << SCR_HEIGHT << " " << SCR_WIDTH << std::endl;
 }
 
 void Application::keyCallback(const int key, const int scanCode, const int action, const int mods)
@@ -256,15 +261,15 @@ void Application::keyCallback(const int key, const int scanCode, const int actio
     {
         if (isFullScreen)
         {
-            glfwSetWindowMonitor(window, NULL, 200, 100, SCR_WIDTH, SCR_HEIGHT, GLFW_DONT_CARE);
-            glfwSetWindowSize(window, 1280, 900);
-            glViewport(0, 0, 1280, 900);
+            glfwSetWindowMonitor(window, NULL, 200, 100, TEMP_SCR_WIDTH, TEMP_SCR_HEIGHT, GLFW_DONT_CARE);
             isFullScreen = false;
         }
         else
         {
+            TEMP_SCR_HEIGHT = SCR_HEIGHT;
+            TEMP_SCR_WIDTH  = SCR_WIDTH;
             glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, 1920, 1080, GLFW_DONT_CARE);
-            glViewport(0, 0, 1920, 1080);
+
             isFullScreen = true;
         }
     }
@@ -292,6 +297,5 @@ void Application::setWindowProperties(const std::string& title, const int width,
     windowTitle = title;
     glfwSetWindowSize(window, width, height);
     glfwSetWindowTitle(window, title.c_str());
-
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 }

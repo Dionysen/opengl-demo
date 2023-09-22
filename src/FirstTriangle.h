@@ -2,7 +2,6 @@
 
 #include "Application.h"
 #include "Camera.h"
-#include "FirstTriangle.h"
 #include "SceneObject.h"
 #include "Texture2D.h"
 

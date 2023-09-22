@@ -50,6 +50,7 @@ class Application : public EventListener
   protected:
     GLFWwindow* window;
     int         SCR_WIDTH, SCR_HEIGHT;
+    int         TEMP_SCR_WIDTH, TEMP_SCR_HEIGHT;
     std::string windowTitle;
 
     ImguiEmbeded* imguiEmbeded;

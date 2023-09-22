@@ -11,7 +11,7 @@
 #include "Terrain.h"
 #include "Terrain2.h"
 #include "WaveObject.h"
-
+#include "XZ.h"
 void MyScene::initialize()
 {
     setWindowProperties("OpenGL Demo", SCR_WIDTH, SCR_HEIGHT);
@@ -59,8 +59,12 @@ void MyScene::initialize()
     // BoneAnimation* boneAnim = new BoneAnimation();
     // addSceneObject(boneAnim);
 
+    XZ* xz = new XZ();
+    addSceneObject(xz);
+
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+    glEnable(GL_BLEND);
     Application::initialize();  // init all objects
     std::cout << "Application initialized.\n";
 }
@@ -85,12 +89,14 @@ void MyScene::render()
     if (ImGui::Checkbox("fullscreen", &isFullScreen))
     {
         if (isFullScreen)
+        {
+            TEMP_SCR_HEIGHT = SCR_HEIGHT;
+            TEMP_SCR_WIDTH  = SCR_WIDTH;
             glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, 1920, 1080, GLFW_DONT_CARE);
+        }
         else
         {
-            glfwSetWindowMonitor(window, NULL, 200, 100, SCR_WIDTH, SCR_HEIGHT, GLFW_DONT_CARE);
-            glfwSetWindowSize(window, 1280, 900);
-            glViewport(0, 0, 1280, 900);
+            glfwSetWindowMonitor(window, NULL, 200, 100, TEMP_SCR_WIDTH, TEMP_SCR_HEIGHT, GLFW_DONT_CARE);
         }
     }
 
