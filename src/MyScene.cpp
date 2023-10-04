@@ -38,8 +38,9 @@ void MyScene::initialize()
     // addSceneObject(triangle);
 
     //   nanosuit
-    // NanoSuit* nanosuit = new NanoSuit();
-    // addSceneObject(nanosuit);
+    //std::shared_ptr<NanoSuit> nanosuit = std::make_shared<NanoSuit> ();
+    //NanoSuit*                 nano     = new NanoSuit();
+    //addSceneObject(nano);
 
     // skybox
     // std::vector<std::string> faces = {

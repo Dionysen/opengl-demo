@@ -20,7 +20,6 @@ class FirstTriangle : public SceneObject
 
     virtual void initialize()
     {
-
         Material* material = new Material();
         setMaterial(material);
 
